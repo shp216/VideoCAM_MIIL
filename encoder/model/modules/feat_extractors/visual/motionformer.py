@@ -211,9 +211,10 @@ class MotionFormer(VisionTransformer):
             x = x.view(1, B * S, C, T, H, W)  # flatten batch and segments
             if cont_mask is not None:
                 cont_mask = cont_mask.view(1, B * S, C, T, H, W)  # same as x
-            x = self.forward_segments(x, orig_shape=orig_shape, cont_mask=cont_mask)
+            x, x_mask = self.forward_segments(x, orig_shape=orig_shape, cont_mask=cont_mask)
             # unpack the segments (using rest dimensions to support different shapes e.g. (BS, D) or (BS, t, D))
             x = x.view(B, S, *x.shape[1:])
+            x_mask = x_mask.view(B, S, *x_mask.shape[1:])
         # x is now of shape (B*S, D) or (B*S, t, D) if `self.temp_attn_agg` is `Identity`
 
         global_x = None
@@ -221,12 +222,14 @@ class MotionFormer(VisionTransformer):
             assert len(x.shape) == 3, f'Local representation should be (B, S, D) {x.shape}'
             global_x = self.global_attn_agg(x)  # (B, D)
 
-        return x, global_x  # x is (B, S, ...), global_x is (B, D) or None
+        return x, global_x, x_mask  # x is (B, S, ...), global_x is (B, D) or None
 
     def forward_segments(self, x, orig_shape: tuple, cont_mask: torch.Tensor = None) -> torch.Tensor:
         '''x is of shape (1, BS, C, T, H, W) where S is the number of segments.'''
         # x = x.repeat(1,1,1,2,1,1)
+        #print("Before: x, x_mask -> ", x.shape, cont_mask.shape)
         x, x_mask = self.forward_features(x, cont_mask=cont_mask)
+        #print("After: x, x_mask -> ", x.shape, x_mask.shape)
         # print(f"x {x.shape}") # x torch.Size([14, 1569, 768]) already 8
         if self.extract_features: # true
             # (BS, T, D) where T = 1 + (224 // 16) * (224 // 16) * 8
@@ -245,6 +248,7 @@ class MotionFormer(VisionTransformer):
                     x_mask = self.restore_spatio_temp_dims(x_mask, orig_shape)  # (B*S, D, t, h, w) <- (B*S, t*h*w, D)
                     # again removing the latent
                     x_mask = x_mask[:, 0, :, :, :]
+                #print("cont_mask in Motionformer: ", x_mask.shape)
 
                 x = self.spatial_attn_agg(x, x_mask)  # (B*S, t, D)
                 # print(f"spatial {x.shape}") # spatial torch.Size([14, 8, 768])
@@ -255,7 +259,7 @@ class MotionFormer(VisionTransformer):
             x = self.pre_logits(x)
             x = self.head_drop(x)
             x = self.head(x)  # (B, num_classes)
-        return x
+        return x, x_mask
 
     def restore_spatio_temp_dims(self, feats: torch.Tensor, orig_shape: tuple) -> torch.Tensor:
         '''

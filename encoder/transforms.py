@@ -94,6 +94,13 @@ class RGBSpatialCrop(torch.nn.Module):
     def forward(self, item):
         # (Tv, C, H, W)
         vid = item['video']
+        o_h, o_w = vid.shape[-2:]
+        # Resize if video size is smaller than target crop size
+        if o_h < self.input_size[0] or o_w < self.input_size[1]:
+            #print(f"video height{o_h}, width{o_w} -> smaller than 224")
+            vid = torchvision.transforms.functional.resize(vid, self.input_size)
+            item['video'] = vid
+            return item
         if self.is_random:
             i, j, h, w = self.get_random_crop_sides(vid, self.input_size)
         else:
@@ -269,6 +276,14 @@ class TemporalCropAndOffset(torch.nn.Module):
         self.offset_type = offset_type
         self.max_off_sec = max_off_sec
         self.max_a_jitter_sec = max_wiggle_sec
+        
+        print("self.crop_len_sec: ", self.crop_len_sec)
+        print("self.do_offset: ",self.do_offset)
+        print("grid_size: ", self.grid_size)
+        print("offset_size: ", self.offset_type)
+        print("max_off_sec: ", self.max_off_sec)
+        print("self.max_a_jitter_sec: ", self.max_a_jitter_sec)
+        
         if do_offset:
             if offset_type == 'grid':
                 self.class_grid = make_class_grid(-max_off_sec, max_off_sec, grid_size, add_doubt_cls,
@@ -291,10 +306,16 @@ class TemporalCropAndOffset(torch.nn.Module):
         vid = item['video']
         # aud = item['audio']
         v_len_frames, C, H, W = vid.shape
+        print("###################################################3")
+        print("vid.shape: ", vid.shape)
+        print("###################################################3")
+
         assert v_len_frames != 0
         # a_len_frames = aud.shape[0]
-
-        v_fps = int(item['meta']['video']['fps'][0])
+        print("Item: \n", item.keys())
+        v_fps = item['meta']['video']['fps'][0]
+        #v_fps = int(item['meta']['video']['fps'][0])
+        print("v_fps: ", v_fps)
         # a_fps = int(item['meta']['audio']['framerate'][0])
 
         v_crop_len_frames = sec2frames(self.crop_len_sec, v_fps)
@@ -308,6 +329,7 @@ class TemporalCropAndOffset(torch.nn.Module):
             if 'offset_target' in item['targets']:
                 is_oos = item['targets']['offset_target'].get('oos', None)
             # train-time
+            print("offset_sec, v_start_i_sec: ", offset_sec, v_start_i_sec)
             if offset_sec is None and v_start_i_sec is None:
 
                 # aud starts `offset_sec` earlier than it should; aud has what will be shown after offset_sec
@@ -338,12 +360,15 @@ class TemporalCropAndOffset(torch.nn.Module):
                 v_start_i_sec = frames2sec(v_start_i, v_fps)
             else:
                 offset_sec = round(offset_sec, 2)
+                print("else offset_sec: ", offset_sec)
                 v_start_i = sec2frames(v_start_i_sec, v_fps)
+                print("v_start_i: ", v_start_i)
             v_end_i = v_start_i + v_crop_len_frames
             # `a_start_i` depends on the rounded value `v_start_i_sec`, otherwise
             # (v_start_sec) we have ±0.1 jittering
             # a_start_i = sec2frames(v_start_i_sec + offset_sec, a_fps)
         else:
+            print("HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
             offset_sec = 0.0
             is_random_crop = item['split'] == 'train' # false
             v_start_i, v_end_i = self.get_crop_idx(v_len_frames, v_crop_len_frames, is_random=is_random_crop)
@@ -376,12 +401,14 @@ class TemporalCropAndOffset(torch.nn.Module):
             vid = np.tile(vid, (repeat_num,1,1,1))
             vid = torch.tensor(vid)
 
+        print("v_start, v_end: ", v_start_i, v_end_i)
         vid = vid[v_start_i:v_end_i, :, :, :]
         # aud = aud[a_start_i:a_end_i]
         item['video'] = vid
         item['audio'] = torch.zeros(8000) # not used. for preventing errors
 
-        assert item['video'].shape[0] == v_fps * self.crop_len_sec, f'{item["video"].shape} {item["path"]}'
+        print("Assertion: ", v_fps * self.crop_len_sec)
+        assert item['video'].shape[0] == int(v_fps * self.crop_len_sec), f'{item["video"].shape} {item["path"]}'
         # assert item['audio'].shape[0] == a_fps * self.crop_len_sec, f'{item["audio"].shape} {item["path"]}'
         # print(v_fps * self.crop_len_sec) # 125 이미 잘림! 
         
@@ -398,7 +425,8 @@ class TemporalCropAndOffset(torch.nn.Module):
             item['targets']['offset_label'] = offset_label
             # assert 'offset_target' not in item['targets'], f'{item["targets"]}. What passed it there?'
             item['targets']['offset_target'] = offset_target
-
+        print("fucking item[video] shape: ", item['video'].shape)
+        print(f"offset_sec: {offset_sec}, v_start_i_sec: {v_start_i_sec}, offset_label: {offset_label}")
         return item
 
     def get_crop_idx(self, len_frames: int, crop_len_frames: int, is_random=False):
@@ -409,116 +437,221 @@ class TemporalCropAndOffset(torch.nn.Module):
         else:
             left_i = int(round((len_frames - crop_len_frames) / 2.))
         return left_i, left_i+crop_len_frames
-
-
+    
 class GenerateMultipleSegments(torch.nn.Module):
     '''
-    Given an item with video and audio, generates a batch of `n_segments` segments
-    of length `segment_size_vframes` (if None, the max number of segments will be made).
-    If `is_start_random` is True, the starting position of the 1st segment will be random but respecting
-    n_segments.
-    `audio_jitter_sec` is the amount of audio offset in seconds.
+    Generates a batch of segments using sliding window.
+    Handles padding for the final segment if it's incomplete.
+    Also returns v_ranges for each segment.
     '''
 
-    def __init__(self, segment_size_vframes: int, n_segments: int = None, is_start_random: bool = False,
-                 audio_jitter_sec: float = 0., step_size_seg: float = 1):
+    def __init__(self, segment_size_vframes: int = 16, step_size_seg=0.5):
         super().__init__()
         self.segment_size_vframes = segment_size_vframes
-        self.n_segments = n_segments
-        self.is_start_random = is_start_random
-        self.audio_jitter_sec = audio_jitter_sec
         self.step_size_seg = step_size_seg
-        logging.info(f'Segment step size: {self.step_size_seg}')
 
     def forward(self, item):
-        v_len_frames, C, H, W = item['video'].shape #125
-        a_len_frames = item['audio'].shape[0]
+        # Extract video information
+        video = item['video']  # RGB video tensor
+        v_len_frames, C, H, W = video.shape
 
-        v_fps = int(item['meta']['video']['fps'][0])
-        a_fps = int(item['meta']['audio']['framerate'][0])
+        # Generate segments
+        padded_segments = []
+        attention_mask = []
+        v_ranges = []
+        self.stride_vframes = int(self.segment_size_vframes * self.step_size_seg)
 
-        ## Determining the number of segments
-        # segment size
-        segment_size_vframes = self.segment_size_vframes # 16
-        segment_size_aframes = sec2frames(frames2sec(self.segment_size_vframes, v_fps), a_fps)
-        # step size (stride)
-        stride_vframes = int(self.step_size_seg * segment_size_vframes)
-        stride_aframes = int(self.step_size_seg * segment_size_aframes)
-        # calculating the number of segments. (W - F + 2P) / S + 1
+        start_idx = 0
+        while start_idx < v_len_frames:
+            end_idx = start_idx + self.segment_size_vframes
 
-        n_segments_max_v = math.floor((v_len_frames - segment_size_vframes) / stride_vframes) + 1
-        n_segments_max_a = math.floor((a_len_frames - segment_size_aframes) / stride_aframes) + 1
+            # 마지막 세그먼트를 확인
+            if end_idx >= v_len_frames:
+                # 패딩 처리
+                valid_frames = video[start_idx:v_len_frames]
+                padding_frames = torch.zeros(
+                    (end_idx - v_len_frames, C, H, W), dtype=video.dtype, device=video.device
+                )
+                segment = torch.cat([valid_frames, padding_frames], dim=0)
+                valid_mask = torch.ones(
+                    (valid_frames.size(0), C, H, W), dtype=torch.bool, device=video.device
+                )
+                padding_mask = torch.zeros(
+                    (padding_frames.size(0), C, H, W), dtype=torch.bool, device=video.device
+                )
+                mask = torch.cat([valid_mask, padding_mask], dim=0)
+                padded_segments.append(segment)
+                attention_mask.append(mask)
+                v_ranges.append([start_idx, v_len_frames])  # 마지막 유효 범위 저장
+                break  # 이후 세그먼트는 생성하지 않음
+
+            # 정상적인 세그먼트 처리
+            segment = video[start_idx:end_idx]
+            mask = torch.ones(
+                (self.segment_size_vframes, C, H, W), dtype=torch.bool, device=video.device
+            )
+            padded_segments.append(segment)
+            attention_mask.append(mask)
+            v_ranges.append([start_idx, end_idx])  # 정상 범위 저장
+
+            # 다음 세그먼트로 이동
+            start_idx += self.stride_vframes
+
+        # Convert to tensors
+        item['video'] = torch.stack(padded_segments, dim=0)  # (num_segments, segment_size_vframes, C, H, W)
+        item['mask'] = torch.stack(attention_mask, dim=0)    # (num_segments, segment_size_vframes, C, H, W)
+        item['v_ranges'] = torch.tensor(v_ranges, dtype=torch.long, device=video.device)  # (num_segments, 2)
+        item['vlen_frames'] = torch.tensor(v_len_frames)
         
-        # making sure audio and video can accommodate the same number of segments
-        # n_segments_max = min(n_segments_max_v, n_segments_max_a)
-        # n_segments_max = n_segments_max_v
-        # n_segments = n_segments_max if self.n_segments is None else self.n_segments
-        # print(n_segments_max_v)
-        # max size is 45 so we will get rid of 5 segments in the beginning and the end 
-        n_segments = self.n_segments # it is set to 40 or 16 in train_utils.get_transforms
-
-        # assert n_segments <= n_segments_max, \
-        #     f'cant make {n_segments} segs of len {self.segment_size_vframes} in a vid ' \
-        #     f'of len {v_len_frames} for {item["path"]}'
-
-        # (n_segments, 2) each
-        v_ranges, a_ranges = self.get_sequential_seg_ranges(v_len_frames, a_len_frames, v_fps, a_fps,
-                                                            n_segments, segment_size_aframes)
-        # a_ranges = self.get_sequential_seg_ranges(v_len_frames, a_len_frames, v_fps, a_fps,
-        #                                                     14, segment_size_aframes)[1]                 
-
-        # segmenting original streams (n_segments, segment_size_frames, C, H, W)
-        item['video'] = torch.stack([item['video'][s:e] for s, e in v_ranges], dim=0)
-        # item['audio'] = torch.stack([item['audio'][s:e] for s, e in a_ranges], dim=0)
-        item['audio'] = torch.zeros(14,10240) # for preventing errors
-
         return item
 
-    def get_sequential_seg_ranges(self, v_len_frames, a_len_frames, v_fps, a_fps, n_seg, seg_size_aframes):
-        # if is_start_random is True, the starting position of the 1st segment will
-        # be random but respecting n_segments like so: "-CCCCCCCC---" (maybe with fixed overlap),
-        # else the segments are taken from the middle of the video respecting n_segments: "--CCCCCCCC--"
+    
+# class GenerateMultipleSegments(torch.nn.Module):
+#     '''
+#     Generates a batch of segments using sliding window.
+#     Handles padding for the final segment if it's incomplete.
+#     Also returns v_ranges for each segment.
+#     '''
 
-        seg_size_vframes = self.segment_size_vframes  # for brevity # 16
+#     def __init__(self, segment_size_vframes: int = 16, step_size_seg=0.5):
+#         super().__init__()
+#         self.segment_size_vframes = segment_size_vframes
+#         self.step_size_seg = step_size_seg
 
-        # calculating the step size in frames
-        step_size_vframes = int(self.step_size_seg * seg_size_vframes) # 8
-        step_size_aframes = int(self.step_size_seg * seg_size_aframes)
+#     def forward(self, item):
+#         # Extract video information
+#         video = item['video']  # RGB video tensor
+#         v_len_frames, C, H, W = video.shape
 
-        # calculating the length of the sequence of segments (and in frames)
-        seg_seq_len = n_seg * self.step_size_seg + (1 - self.step_size_seg) # 14*0.5+0.5 = 7.5
-        vframes_seg_seq_len = int(seg_seq_len * seg_size_vframes) # 7.5*16 = 120
-        aframes_seg_seq_len = int(seg_seq_len * seg_size_aframes)
+#         # Generate segments
+#         padded_segments = []
+#         attention_mask = []
+#         v_ranges = []
+#         self.stride_vframes = int(self.segment_size_vframes * self.step_size_seg)
 
-        # doing temporal crop
-        max_v_start_i = v_len_frames - vframes_seg_seq_len # 125-120
-        if self.is_start_random:
-            v_start_i = random.randint(0, max_v_start_i)
-        else: # here 
-            v_start_i = max_v_start_i // 2 # we will get rid of some frames from beginning and end to fit 320 with audio
-        a_start_i = sec2frames(frames2sec(v_start_i, v_fps), a_fps)  # vid frames -> seconds -> aud frames
+#         start_idx = 0
+#         while start_idx < v_len_frames:
+#             end_idx = start_idx + self.segment_size_vframes
 
-        # make segments starts
-        v_start_seg_i = torch.tensor([v_start_i + i * step_size_vframes for i in range(n_seg)]).int()
-        a_start_seg_i = torch.tensor([a_start_i + i * step_size_aframes for i in range(n_seg)]).int()
+#             # 마지막 세그먼트를 확인
+#             if end_idx > v_len_frames:
+#                 # 패딩 처리
+#                 valid_frames = video[start_idx:v_len_frames]
+#                 padding_frames = torch.zeros(
+#                     (end_idx - v_len_frames, C, H, W), dtype=video.dtype, device=video.device
+#                 )
+#                 segment = torch.cat([valid_frames, padding_frames], dim=0)
+#                 mask = torch.cat([torch.ones(valid_frames.size(0), dtype=torch.bool, device=video.device),
+#                                   torch.zeros(padding_frames.size(0), dtype=torch.bool, device=video.device)])
+#                 padded_segments.append(segment)
+#                 attention_mask.append(mask)
+#                 v_ranges.append([start_idx, v_len_frames])  # 마지막 유효 범위 저장
+#                 break  # 이후 세그먼트는 생성하지 않음
 
-        # apply jitter to audio
-        if self.audio_jitter_sec > 0:
-            jitter_aframes = sec2frames(self.audio_jitter_sec, a_fps)
-            # making sure after applying jitter, the audio is still within the audio boundaries
-            jitter_aframes = min(jitter_aframes, a_start_i, a_len_frames-a_start_i-aframes_seg_seq_len)
-            a_start_seg_i += random.randint(-jitter_aframes, jitter_aframes)  # applying jitter to segments
+#             # 정상적인 세그먼트 처리
+#             segment = video[start_idx:end_idx]
+#             mask = torch.ones(self.segment_size_vframes, dtype=torch.bool, device=video.device)
+#             padded_segments.append(segment)
+#             attention_mask.append(mask)
+#             v_ranges.append([start_idx, end_idx])  # 정상 범위 저장
 
-        # make segment ends
-        v_ends_seg_i = v_start_seg_i + seg_size_vframes
-        a_ends_seg_i = a_start_seg_i + seg_size_aframes  # using the adjusted a_start_seg_i (with jitter)
+#             # 다음 세그먼트로 이동
+#             start_idx += self.stride_vframes
 
-        # make ranges
-        v_ranges = torch.stack([v_start_seg_i, v_ends_seg_i], dim=1)
-        a_ranges = torch.stack([a_start_seg_i, a_ends_seg_i], dim=1)
-        # assert (a_ranges >= 0).all() and (a_ranges <= a_len_frames).all(), f'{a_ranges} out of {a_len_frames}'
-        # assert (v_ranges <= v_len_frames).all(), f'{v_ranges} out of {v_len_frames}'
-        return v_ranges, a_ranges
+#         # Convert to tensors
+#         item['video'] = torch.stack(padded_segments, dim=0)  # (num_segments, segment_size_vframes, C, H, W)
+#         item['mask'] = torch.stack(attention_mask, dim=0)    # (num_segments, segment_size_vframes)
+#         item['v_ranges'] = torch.tensor(v_ranges, dtype=torch.long, device=video.device)  # (num_segments, 2)
+#         item['vlen_frames'] = torch.tensor(v_len_frames)
+#         return item
+
+
+
+
+# class GenerateMultipleSegments(torch.nn.Module):
+#     '''
+#     Given an item with video and audio, generates a batch of segments using sliding window.
+#     '''
+
+#     def __init__(self, segment_size_vframes: int = 16, step_size_seg: float = 0.5, is_start_random: bool = True):
+#         super().__init__()
+#         self.segment_size_vframes = segment_size_vframes
+#         self.step_size_seg = step_size_seg
+#         self.is_start_random = is_start_random
+        
+        
+#     # 재사용 가능한 비디오 범위 계산 함수
+#     def calculate_v_ranges_dynamic_torch(self, v_len_frames, segment_size_vframes, stride_vframes, is_start_random=True):
+#         """
+#         슬라이딩 윈도우 방식으로 비디오 세그먼트 범위를 계산하고, torch 텐서를 반환합니다.
+
+#         Args:
+#             v_len_frames (int): 비디오 총 프레임 수.
+#             segment_size_vframes (int): 각 세그먼트의 프레임 수.
+#             stride_vframes (int): 두 세그먼트 간 이동 크기.
+#             is_start_random (bool): 시작 지점을 랜덤하게 선택할지 여부.
+
+#         Returns:
+#             torch.Tensor: [n_seg, 2] 형태로 (start, end) 인덱스를 포함하는 텐서.
+#         """
+#         # 세그먼트 개수 계산
+#         #print("vlen_frames, segment_size_vframes, stride_vframes: ", v_len_frames, segment_size_vframes, stride_vframes)
+#         n_seg = (v_len_frames - segment_size_vframes) // stride_vframes + 1
+#         assert n_seg > 0, "세그먼트 크기 또는 스트라이드가 비디오 길이에 비해 너무 큽니다."
+
+#         # 시작 인덱스 결정
+#         v_start_i = random.randint(0, v_len_frames - (n_seg * stride_vframes + (segment_size_vframes - stride_vframes))) \
+#             if is_start_random else 0
+
+#         # 범위 생성
+#         v_start_indices = torch.arange(n_seg) * stride_vframes + v_start_i
+#         v_end_indices = v_start_indices + segment_size_vframes
+
+#         # [n_seg, 2] 형태로 생성
+#         return torch.stack([v_start_indices, v_end_indices], dim=1)
+
+#     def forward(self, item):
+#         # 비디오 정보 추출
+#         v_len_frames, C, H, W = item['video'].shape
+#         a_len_frames = item['audio'].shape[0]
+
+#         v_fps = int(item['meta']['video']['fps'][0])
+#         a_fps = int(item['meta']['audio']['framerate'][0])
+#         #print("video shape before segment: ", item['video'].shape, v_fps)
+
+#         # 비디오 세그먼트 크기 및 스트라이드 계산
+#         stride_vframes = int(self.step_size_seg * self.segment_size_vframes)
+
+#         # 비디오 세그먼트 범위 계산
+#         v_ranges = self.calculate_v_ranges_dynamic_torch(
+#             v_len_frames=v_len_frames,
+#             segment_size_vframes=self.segment_size_vframes,
+#             stride_vframes=stride_vframes,
+#             is_start_random=self.is_start_random
+#         )
+#         #print("v_ranges:", v_ranges)
+#         if v_ranges.shape[0] != 14:
+#             print("#################################################################")
+#             print("error video shape -> : ", item['video'].shape)
+#             print("#################################################################")
+
+#         # 비디오 세그먼트 생성
+#         item['video'] = torch.stack([item['video'][s:e] for s, e in v_ranges.tolist()], dim=0)
+
+#         # 오디오 세그먼트 생성 (기존 코드 유지)
+#        # segment_size_aframes = sec2frames(frames2sec(self.segment_size_vframes, v_fps), a_fps)
+#        # stride_aframes = int(self.step_size_seg * segment_size_aframes)
+
+#         # a_ranges = self.calculate_v_ranges_dynamic_torch(
+#         #     v_len_frames=a_len_frames,
+#         #     segment_size_vframes=segment_size_aframes,
+#         #     stride_vframes=stride_aframes,
+#         #     is_start_random=self.is_start_random
+#         # )
+
+#         item['audio'] = torch.zeros(14, 10240)  # for preventing errors
+#         #print("Output audio shape:", item['audio'].shape)
+#         return item
 
 
 class TemporalCropAndOffsetForSyncabilityTraining(torch.nn.Module):

@@ -117,28 +117,28 @@ data:
       vis_load_backend: read_video
       size_ratio: null
 transform_sequence_train:
-- target: encoder.transforms.EqualifyFromRight
-  params:
-    clip_max_len_sec: 10
+# - target: encoder.transforms.EqualifyFromRight
+#   params:
+#     clip_max_len_sec: 10
 - target: encoder.transforms.RGBSpatialCropSometimesUpscale
   params:
     sometimes_p: 0.0
     smaller_input_size: 192
     target_input_size: 224
     is_random: true
-- target: encoder.transforms.TemporalCropAndOffset
-  params:
-    crop_len_sec: 5
-    max_off_sec: 2
-    max_wiggle_sec: 0.05
-    do_offset: true
-    offset_type: grid
-    prob_oos: null
-    grid_size: 21
-    segment_size_vframes: 16
-    n_segments: 14
-    step_size_seg: 0.5
-    vfps: 25
+# - target: encoder.transforms.TemporalCropAndOffset
+#   params:
+#     crop_len_sec: 5
+#     max_off_sec: 2
+#     max_wiggle_sec: 0.05
+#     do_offset: true
+#     offset_type: grid
+#     prob_oos: null
+#     grid_size: 21
+#     segment_size_vframes: 16
+#     n_segments: 14
+#     step_size_seg: 0.5
+#     vfps: 25
 - target: encoder.transforms.RandomApplyColorDistortion
   params:
     p_color_jitter: 0.0
@@ -147,31 +147,29 @@ transform_sequence_train:
 - target: encoder.transforms.RandomHorizontalFlip
   params:
     p: 0.5
-- target: encoder.transforms.AudioRandomReverb
-  params:
-    p: 0.0
-- target: encoder.transforms.AudioRandomVolume
-  params:
-    p: 0.0
-    gain: 2.0
-    gain_type: amplitude
-- target: encoder.transforms.AudioRandomPitchShift
-  params:
-    p: 0.0
-    shift: 1000
-- target: encoder.transforms.AudioRandomLowpassFilter
-  params:
-    p: 0.0
-    cutoff_freq: 100
-- target: encoder.transforms.AudioRandomGaussNoise
-  params:
-    p: 0.0
-    amplitude: 0.01
+# - target: encoder.transforms.AudioRandomReverb
+#   params:
+#     p: 0.0
+# - target: encoder.transforms.AudioRandomVolume
+#   params:
+#     p: 0.0
+#     gain: 2.0
+#     gain_type: amplitude
+# - target: encoder.transforms.AudioRandomPitchShift
+#   params:
+#     p: 0.0
+#     shift: 1000
+# - target: encoder.transforms.AudioRandomLowpassFilter
+#   params:
+#     p: 0.0
+#     cutoff_freq: 100
+# - target: encoder.transforms.AudioRandomGaussNoise
+#   params:
+#     p: 0.0
+#     amplitude: 0.01
 - target: encoder.transforms.GenerateMultipleSegments
   params:
     segment_size_vframes: 16
-    n_segments: 14
-    is_start_random: true
     step_size_seg: 0.5
 - target: encoder.transforms.RGBToHalfToZeroOne
 - target: encoder.transforms.RGBNormalize
@@ -184,49 +182,47 @@ transform_sequence_train:
     - 0.5
     - 0.5
     - 0.5
-- target: encoder.transforms.AudioMelSpectrogram
-  params:
-    sample_rate: 16000
-    win_length: 400
-    hop_length: 160
-    n_fft: 1024
-    n_mels: 128
-- target: encoder.transforms.AudioLog
-- target: encoder.transforms.PadOrTruncate
-  params:
-    max_spec_t: 66
-- target: encoder.transforms.AudioNormalizeAST
-  params:
-    mean: -4.2677393
-    std: 4.5689974
-- target: encoder.transforms.PermuteStreams
-  params:
-    einops_order_audio: S F T -> S 1 F T
-    einops_order_rgb: S T C H W -> S T C H W
+# - target: encoder.transforms.AudioMelSpectrogram
+#   params:
+#     sample_rate: 16000
+#     win_length: 400
+#     hop_length: 160
+#     n_fft: 1024
+#     n_mels: 128
+# - target: encoder.transforms.AudioLog
+# - target: encoder.transforms.PadOrTruncate
+#   params:
+#     max_spec_t: 66
+# - target: encoder.transforms.AudioNormalizeAST
+#   params:
+#     mean: -4.2677393
+#     std: 4.5689974
+# - target: encoder.transforms.PermuteStreams
+#   params:
+#     einops_order_audio: S F T -> S 1 F T
+#     einops_order_rgb: S T C H W -> S T C H W
 transform_sequence_test:
 - target: encoder.transforms.EqualifyFromRight
 - target: encoder.transforms.RGBSpatialCrop
   params:
     input_size: 224
     is_random: false
-- target: encoder.transforms.TemporalCropAndOffset
-  params:
-    crop_len_sec: 5
-    max_off_sec: 2
-    max_wiggle_sec: 0.0
-    do_offset: true
-    grid_size: 21
-    offset_type: grid
-    prob_oos: null
-    segment_size_vframes: 16
-    n_segments: 14
-    step_size_seg: 0.5
-    vfps: 25
+# - target: encoder.transforms.TemporalCropAndOffset
+#   params:
+#     crop_len_sec: 5.0
+#     max_off_sec: 2
+#     max_wiggle_sec: 0.0
+#     do_offset: true
+#     grid_size: 21
+#     offset_type: grid
+#     prob_oos: null
+#     segment_size_vframes: 16
+#     n_segments: 14
+#     step_size_seg: 0.5
+#     vfps: 25
 - target: encoder.transforms.GenerateMultipleSegments
   params:
     segment_size_vframes: 16
-    n_segments: 14
-    is_start_random: false
     step_size_seg: 0.5
 - target: encoder.transforms.RGBToHalfToZeroOne
 - target: encoder.transforms.RGBNormalize
@@ -239,25 +235,25 @@ transform_sequence_test:
     - 0.5
     - 0.5
     - 0.5
-- target: encoder.transforms.AudioMelSpectrogram
-  params:
-    sample_rate: 16000
-    win_length: 400
-    hop_length: 160
-    n_fft: 1024
-    n_mels: 128
-- target: encoder.transforms.AudioLog
-- target: encoder.transforms.PadOrTruncate
-  params:
-    max_spec_t: 66
-- target: encoder.transforms.AudioNormalizeAST
-  params:
-    mean: -4.2677393
-    std: 4.5689974
-- target: encoder.transforms.PermuteStreams
-  params:
-    einops_order_audio: S F T -> S 1 F T
-    einops_order_rgb: S T C H W -> S T C H W
+# - target: encoder.transforms.AudioMelSpectrogram
+#   params:
+#     sample_rate: 16000
+#     win_length: 400
+#     hop_length: 160
+#     n_fft: 1024
+#     n_mels: 128
+# - target: encoder.transforms.AudioLog
+# - target: encoder.transforms.PadOrTruncate
+#   params:
+#     max_spec_t: 66
+# - target: encoder.transforms.AudioNormalizeAST
+#   params:
+#     mean: -4.2677393
+#     std: 4.5689974
+# - target: encoder.transforms.PermuteStreams
+#   params:
+#     einops_order_audio: S F T -> S 1 F T
+#     einops_order_rgb: S T C H W -> S T C H W
 logging:
   logdir: /scratch/project_462000293/vladimir/logs/sync/sync_models/
   log_code_state: true

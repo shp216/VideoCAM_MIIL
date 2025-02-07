@@ -139,3 +139,187 @@ def seed_everything(seed):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
+
+
+def custom_collate_fn(batch):
+    filtered_batch = []  # 조건에 맞는 샘플을 저장할 리스트
+    skipped_indices = []  # 제외된 샘플의 인덱스 저장
+
+    # 유효한 샘플 필터링
+    for idx, sample in enumerate(batch):
+        try:
+            # "duration"이 0보다 큰 경우만 유효한 샘플로 간주
+            if "video" in sample and sample["duration"] > 0:
+                filtered_batch.append(sample)
+            else:
+                skipped_indices.append(idx)
+        except Exception as e:
+            print(f"[Warning] Sample {idx} skipped due to error: {e}")
+            skipped_indices.append(idx)
+
+    # 로그 출력
+    if skipped_indices:
+        print(f"[Info] Skipped samples: {skipped_indices}")
+
+    # 필터링된 샘플로 배치 생성
+    if not filtered_batch:
+        return {}  # 유효한 샘플이 없으면 빈 딕셔너리 반환
+
+    collated_batch = {}
+
+    # 각 샘플의 최대 길이 확인
+    max_segments = max(sample["video"].shape[0] for sample in filtered_batch)
+    max_time = max(sample["gradcam"].shape[1] for sample in filtered_batch)
+
+    # 비디오, gradcam, attention_mask, gradcam_mask 생성
+    videos = []
+    gradcams = []
+    attention_masks = []
+    gradcam_masks = []
+    v_ranges = []
+
+    for sample in filtered_batch:
+        # 비디오 패딩
+        video = sample["video"]
+        video_padding = torch.zeros(
+            (max_segments - video.shape[0], *video.shape[1:]), dtype=video.dtype, device=video.device
+        )
+        videos.append(torch.cat([video, video_padding], dim=0))  # 패딩된 비디오 추가
+
+        # gradcam 패딩
+        gradcam = sample["gradcam"]
+        gradcam_padding = torch.zeros(
+            (gradcam.shape[0], max_time - gradcam.shape[1]), dtype=gradcam.dtype, device=gradcam.device
+        )
+        gradcams.append(torch.cat([gradcam, gradcam_padding], dim=1))  # 패딩된 gradcam 추가
+
+        # attention_mask 패딩
+        attention_mask = sample["attention_mask"]
+        attention_mask_padding = torch.zeros(
+            (max_segments - attention_mask.shape[0], *attention_mask.shape[1:]),
+            dtype=attention_mask.dtype,
+            device=attention_mask.device,
+        )
+        attention_masks.append(torch.cat([attention_mask, attention_mask_padding], dim=0))  # 패딩된 attention_mask 추가
+
+        # gradcam_mask 생성
+        gradcam_mask = torch.zeros(max_time, dtype=torch.bool, device=gradcam.device)
+        gradcam_mask[:gradcam.shape[1]] = 1  # 유효한 시간 부분만 1로 설정
+        gradcam_masks.append(gradcam_mask)
+
+        # v_ranges 패딩
+        current_v_ranges = sample["v_ranges"]
+        v_range_padding = torch.zeros((max_segments - current_v_ranges.shape[0], 2), dtype=torch.long, device=current_v_ranges.device)
+        v_ranges.append(torch.cat([current_v_ranges, v_range_padding], dim=0))  # 패딩된 v_ranges 추가
+
+    # 텐서로 변환
+    collated_batch["video"] = torch.stack(videos, dim=0)  # (B, max_segments, ...)
+    collated_batch["gradcam"] = torch.stack(gradcams, dim=0)  # (B, 527, max_time)
+    collated_batch["attention_mask"] = torch.stack(attention_masks, dim=0)  # (B, max_segments, segment_size_vframes, C, H, W)
+    collated_batch["gradcam_mask"] = torch.stack(gradcam_masks, dim=0)  # (B, max_time)
+    collated_batch["v_ranges"] = torch.stack(v_ranges, dim=0)  # (B, max_segments, 2)
+
+    return collated_batch
+
+
+def custom_collate_fn_test(batch):
+    filtered_batch = []  # 조건에 맞는 샘플을 저장할 리스트
+    skipped_indices = []  # 제외된 샘플의 인덱스 저장
+
+    # 유효한 샘플 필터링
+    for idx, sample in enumerate(batch):
+        try:
+            # "duration"이 0보다 큰 경우만 유효한 샘플로 간주
+            if "video" in sample and sample["duration"] > 0:
+                filtered_batch.append(sample)
+            else:
+                skipped_indices.append(idx)
+        except Exception as e:
+            print(f"[Warning] Sample {idx} skipped due to error: {e}")
+            skipped_indices.append(idx)
+
+    # 로그 출력
+    if skipped_indices:
+        print(f"[Info] Skipped samples: {skipped_indices}")
+
+    # 필터링된 샘플로 배치 생성
+    if not filtered_batch:
+        return {}  # 유효한 샘플이 없으면 빈 딕셔너리 반환
+
+    collated_batch = {}
+
+    # 각 샘플의 최대 길이 확인
+    max_segments = max(sample["video"].shape[0] for sample in filtered_batch)
+    max_time = max(sample["gradcam_0s"].shape[1] for sample in filtered_batch)
+
+    # 비디오, gradcam, attention_mask, gradcam_mask 생성
+    videos = []
+    gradcam_0s = []
+    gradcam_1s = []
+    gradcam_2s = []
+    attention_masks = []
+    gradcam_masks = []  # gradcam_mask는 하나만 생성
+    v_ranges = []
+
+    for sample in filtered_batch:
+        # 비디오 패딩
+        video = sample["video"]
+        video_padding = torch.zeros(
+            (max_segments - video.shape[0], *video.shape[1:]), dtype=video.dtype, device=video.device
+        )
+        videos.append(torch.cat([video, video_padding], dim=0))  # 패딩된 비디오 추가
+
+        # gradcam_0s 패딩
+        gradcam = sample["gradcam_0s"]
+        gradcam_padding = torch.zeros(
+            (gradcam.shape[0], max_time - gradcam.shape[1]), dtype=gradcam.dtype, device=gradcam.device
+        )
+        gradcam_0s.append(torch.cat([gradcam, gradcam_padding], dim=1))
+
+        # gradcam_1s 패딩
+        gradcam = sample["gradcam_1s"]
+        gradcam_padding = torch.zeros(
+            (gradcam.shape[0], max_time - gradcam.shape[1]), dtype=gradcam.dtype, device=gradcam.device
+        )
+        gradcam_1s.append(torch.cat([gradcam, gradcam_padding], dim=1))
+
+        # gradcam_2s 패딩
+        gradcam = sample["gradcam_2s"]
+        gradcam_padding = torch.zeros(
+            (gradcam.shape[0], max_time - gradcam.shape[1]), dtype=gradcam.dtype, device=gradcam.device
+        )
+        gradcam_2s.append(torch.cat([gradcam, gradcam_padding], dim=1))
+
+        # attention_mask 패딩
+        attention_mask = sample["attention_mask"]
+        attention_mask_padding = torch.zeros(
+            (max_segments - attention_mask.shape[0], *attention_mask.shape[1:]),
+            dtype=attention_mask.dtype,
+            device=attention_mask.device,
+        )
+        attention_masks.append(torch.cat([attention_mask, attention_mask_padding], dim=0))  # 패딩된 attention_mask 추가
+
+        # gradcam_mask 생성 (하나만 사용)
+        gradcam_mask = torch.zeros(max_time, dtype=torch.bool, device=sample["gradcam_0s"].device)
+        gradcam_mask[:sample["gradcam_0s"].shape[1]] = 1  # 유효한 시간 부분만 1로 설정
+        gradcam_masks.append(gradcam_mask)
+
+        # v_ranges 패딩
+        current_v_ranges = sample["v_ranges"]
+        v_range_padding = torch.zeros((max_segments - current_v_ranges.shape[0], 2), dtype=torch.long, device=current_v_ranges.device)
+        v_ranges.append(torch.cat([current_v_ranges, v_range_padding], dim=0))  # 패딩된 v_ranges 추가
+
+
+    # 텐서로 변환
+    collated_batch["video"] = torch.stack(videos, dim=0)  # (B, max_segments, ...)
+    collated_batch["gradcam_0s"] = torch.stack(gradcam_0s, dim=0)  # (B, gradcam_dim, max_time)
+    collated_batch["gradcam_1s"] = torch.stack(gradcam_1s, dim=0)  # (B, gradcam_dim, max_time)
+    collated_batch["gradcam_2s"] = torch.stack(gradcam_2s, dim=0)  # (B, gradcam_dim, max_time)
+    collated_batch["attention_mask"] = torch.stack(attention_masks, dim=0)  # (B, max_segments, segment_size_vframes, C, H, W)
+    collated_batch["gradcam_mask"] = torch.stack(gradcam_masks, dim=0)  # (B, max_time)
+    collated_batch["v_ranges"] = torch.stack(v_ranges, dim=0)  # (B, max_segments, 2)
+
+    return collated_batch
+
+
+

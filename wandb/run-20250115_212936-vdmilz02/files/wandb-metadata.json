@@ -1,0 +1,46 @@
+{
+  "os":  "Linux-5.15.0-122-generic-x86_64-with-glibc2.31",
+  "python":  "CPython 3.10.16",
+  "startedAt":  "2025-01-15T12:29:36.413080Z",
+  "args":  [
+    "--resume",
+    "--checkpoint_path",
+    "./results_resume/checkpoint_epoch0_step40.pth"
+  ],
+  "program":  "/workspace/rewas/./train_miil.py",
+  "codePath":  "train_miil.py",
+  "git":  {
+    "remote":  "https://github.com/naver-ai/rewas.git"
+  },
+  "email":  "qkrtpghks1214@gmail.com",
+  "root":  "/workspace/rewas",
+  "host":  "c6f03a4e4d0b",
+  "executable":  "/root/miniconda3/envs/rewas/bin/python3",
+  "codePathLocal":  "train_miil.py",
+  "cpu_count":  64,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA H100 NVL",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "942860439552",
+      "used":  "622139723776"
+    }
+  },
+  "memory":  {
+    "total":  "1081864425472"
+  },
+  "cpu":  {
+    "count":  64,
+    "countLogical":  128
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA H100 NVL",
+      "memoryTotal":  "100485038080",
+      "cudaCores":  16896,
+      "architecture":  "Hopper"
+    }
+  ],
+  "cudaVersion":  "12.4"
+}

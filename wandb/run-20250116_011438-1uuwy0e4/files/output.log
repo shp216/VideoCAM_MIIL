@@ -1,0 +1,638 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:46<00:00,  1.13it/s]
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:09<00:00,  1.46it/s]
+Evaluation completed. Average Loss1: 6.2333, Average Loss2: 6.2093, Average Loss3: 6.1882
+Evaluation completed. Soft IoU: 6.2333, IoU1: 0.0049, IoU2: 0.0052, IoU3: 0.0077
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step0.pth
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:05<00:00,  1.50it/s]
+Evaluation completed. Average Loss1: 1.1906, Average Loss2: 1.2457, Average Loss3: 1.2352
+Evaluation completed. Soft IoU: 1.1906, IoU1: 0.0094, IoU2: 0.0031, IoU3: 0.0031
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:03<00:00,  1.52it/s]
+Evaluation completed. Average Loss1: 1.1523, Average Loss2: 1.2190, Average Loss3: 1.2177
+Evaluation completed. Soft IoU: 1.1523, IoU1: 0.0096, IoU2: 0.0032, IoU3: 0.0031
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:19<00:00,  1.34it/s]                                                                                   | 10000/84952 [3:08:15<22:55:13,  1.10s/it, Loss=1.31]
+Evaluation completed. Average Loss1: 1.1686, Average Loss2: 1.2341, Average Loss3: 1.2268
+Evaluation completed. Soft IoU: 1.1686, IoU1: 0.0094, IoU2: 0.0031, IoU3: 0.0032
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:17<00:00,  1.37it/s]                                                                                   | 12500/84952 [3:56:52<23:29:45,  1.17s/it, Loss=1.06]
+Evaluation completed. Average Loss1: 1.2055, Average Loss2: 1.3063, Average Loss3: 1.3176
+Evaluation completed. Soft IoU: 1.2055, IoU1: 0.0098, IoU2: 0.0032, IoU3: 0.0030
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:16<00:00,  1.38it/s]                                                                                   | 15000/84952 [4:44:27<18:56:42,  1.03it/s, Loss=0.53]
+Evaluation completed. Average Loss1: 1.1965, Average Loss2: 1.2882, Average Loss3: 1.3123
+Evaluation completed. Soft IoU: 1.1965, IoU1: 0.0104, IoU2: 0.0035, IoU3: 0.0033
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:09<00:00,  1.45it/s]                                                                                  | 17500/84952 [5:40:57<20:57:06,  1.12s/it, Loss=0.927]
+Evaluation completed. Average Loss1: 1.1607, Average Loss2: 1.2379, Average Loss3: 1.2513
+Evaluation completed. Soft IoU: 1.1607, IoU1: 0.0108, IoU2: 0.0037, IoU3: 0.0034
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:17<00:00,  1.37it/s]                                                                                  | 20000/84952 [6:37:46<18:57:42,  1.05s/it, Loss=0.424]
+Evaluation completed. Average Loss1: 1.1556, Average Loss2: 1.2306, Average Loss3: 1.2408
+Evaluation completed. Soft IoU: 1.1556, IoU1: 0.0104, IoU2: 0.0035, IoU3: 0.0034
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [03:25<00:00,  1.09s/it]                                                                                  | 22500/84952 [7:32:52<19:33:28,  1.13s/it, Loss=0.449]
+Evaluation completed. Average Loss1: 1.1779, Average Loss2: 1.2730, Average Loss3: 1.3060
+Evaluation completed. Soft IoU: 1.1779, IoU1: 0.0103, IoU2: 0.0034, IoU3: 0.0032
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step20000.pth
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [05:06<00:00,  1.63s/it]                                                                                  | 25000/84952 [8:35:35<34:14:02,  2.06s/it, Loss=0.276]
+Evaluation completed. Average Loss1: 1.1482, Average Loss2: 1.2652, Average Loss3: 1.3321
+Evaluation completed. Soft IoU: 1.1482, IoU1: 0.0118, IoU2: 0.0040, IoU3: 0.0036
+Evaluating: 100%|██████████████████████████████████████████████████████████████| 188/188 [02:16<00:00,  1.37it/s]                                                                                  | 27500/84952 [9:43:47<16:43:59,  1.05s/it, Loss=0.674]
+Evaluation completed. Average Loss1: 1.1268, Average Loss2: 1.2379, Average Loss3: 1.2960
+Evaluation completed. Soft IoU: 1.1268, IoU1: 0.0118, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [03:48<00:00,  1.22s/it]                                                                                 | 30000/84952 [10:53:29<17:59:35,  1.18s/it, Loss=1.05]
+Evaluation completed. Average Loss1: 1.0883, Average Loss2: 1.1943, Average Loss3: 1.2687
+Evaluation completed. Soft IoU: 1.0883, IoU1: 0.0127, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [03:57<00:00,  1.26s/it]                                                                                | 32500/84952 [12:05:43<14:35:02,  1.00s/it, Loss=0.965]
+Evaluation completed. Average Loss1: 1.0918, Average Loss2: 1.1598, Average Loss3: 1.1932
+Evaluation completed. Soft IoU: 1.0918, IoU1: 0.0123, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [03:23<00:00,  1.08s/it]                                                                                | 35000/84952 [13:13:53<21:13:50,  1.53s/it, Loss=0.446]
+Evaluation completed. Average Loss1: 1.0882, Average Loss2: 1.1906, Average Loss3: 1.2454
+Evaluation completed. Soft IoU: 1.0882, IoU1: 0.0122, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:51<00:00,  1.09it/s]                                                                                 | 37500/84952 [14:29:46<15:38:03,  1.19s/it, Loss=0.84]
+Evaluation completed. Average Loss1: 1.1261, Average Loss2: 1.2424, Average Loss3: 1.2988
+Evaluation completed. Soft IoU: 1.1261, IoU1: 0.0121, IoU2: 0.0042, IoU3: 0.0038
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:57<00:00,  1.06it/s]                                                                                | 40000/84952 [15:41:45<12:53:19,  1.03s/it, Loss=0.496]
+Evaluation completed. Average Loss1: 1.2787, Average Loss2: 1.4121, Average Loss3: 1.4561
+Evaluation completed. Soft IoU: 1.2787, IoU1: 0.0112, IoU2: 0.0040, IoU3: 0.0037
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:41<00:00,  1.16it/s]                                                                                 | 42500/84952 [16:49:24<12:24:44,  1.05s/it, Loss=0.93]
+Evaluation completed. Average Loss1: 1.1691, Average Loss2: 1.2943, Average Loss3: 1.3518
+Evaluation completed. Soft IoU: 1.1691, IoU1: 0.0121, IoU2: 0.0043, IoU3: 0.0040
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step40000.pth
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [03:30<00:00,  1.12s/it]                                                                                | 45000/84952 [18:00:18<12:36:43,  1.14s/it, Loss=0.504]
+Evaluation completed. Average Loss1: 1.2203, Average Loss2: 1.3585, Average Loss3: 1.4172
+Evaluation completed. Soft IoU: 1.2203, IoU1: 0.0118, IoU2: 0.0039, IoU3: 0.0035
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:36<00:00,  1.20it/s]▋                                                                               | 47500/84952 [19:16:54<35:53:12,  3.45s/it, Loss=0.226]
+Evaluation completed. Average Loss1: 1.0558, Average Loss2: 1.1392, Average Loss3: 1.1984
+Evaluation completed. Soft IoU: 1.0558, IoU1: 0.0130, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:31<00:00,  1.24it/s]█████▉                                                                          | 50000/84952 [20:22:44<10:40:04,  1.10s/it, Loss=0.559]
+Evaluation completed. Average Loss1: 1.1585, Average Loss2: 1.3073, Average Loss3: 1.4069
+Evaluation completed. Soft IoU: 1.1585, IoU1: 0.0122, IoU2: 0.0040, IoU3: 0.0036
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:24<00:00,  1.30it/s]███████████▊                                                                     | 52500/84952 [21:44:35<8:57:02,  1.01it/s, Loss=0.612]
+Evaluation completed. Average Loss1: 1.1172, Average Loss2: 1.2389, Average Loss3: 1.3009
+Evaluation completed. Soft IoU: 1.1172, IoU1: 0.0121, IoU2: 0.0042, IoU3: 0.0039
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [03:12<00:00,  1.03s/it]█████████████████▏                                                               | 55000/84952 [23:00:57<9:12:36,  1.11s/it, Loss=0.219]
+Evaluation completed. Average Loss1: 1.1104, Average Loss2: 1.2381, Average Loss3: 1.3200
+Evaluation completed. Soft IoU: 1.1104, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0041
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [04:05<00:00,  1.30s/it]██████████████████████▌                                                          | 57500/84952 [24:06:04<23:34:44,  3.09s/it, Loss=1.11]
+Evaluation completed. Average Loss1: 1.1080, Average Loss2: 1.2255, Average Loss3: 1.3026
+Evaluation completed. Soft IoU: 1.1080, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:43<00:00,  1.15it/s]████████████████████████████▌                                                     | 60000/84952 [25:28:21<7:33:52,  1.09s/it, Loss=1.22]
+Evaluation completed. Average Loss1: 1.1335, Average Loss2: 1.2336, Average Loss3: 1.2765
+Evaluation completed. Soft IoU: 1.1335, IoU1: 0.0123, IoU2: 0.0044, IoU3: 0.0041
+Evaluating: 100%|█| 188/188 [05:30<00:00,  1.██████████████████████████████████████████████████████████████████████████████████████████████████████▏                                               | 62500/84952 [26:40:34<7:28:25,  1.20s/it, Loss=0.465]
+Evaluation completed. Average Loss1: 1.0958, Average Loss2: 1.1865, Average Loss3: 1.2214
+Evaluation completed. Soft IoU: 1.0958, IoU1: 0.0124, IoU2: 0.0045, IoU3: 0.0042
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step60000.pth
+Evaluating: 100%|█| 188/188 [02:46<00:00,  1.███████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                          | 65000/84952 [28:00:29<5:49:19,  1.05s/it, Loss=0.298]
+Evaluation completed. Average Loss1: 1.2066, Average Loss2: 1.3417, Average Loss3: 1.4004
+Evaluation completed. Soft IoU: 1.2066, IoU1: 0.0116, IoU2: 0.0040, IoU3: 0.0037
+Evaluating: 100%|█| 188/188 [03:18<00:00,  1.█████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                     | 67500/84952 [29:09:28<5:32:34,  1.14s/it, Loss=1.21]
+Evaluation completed. Average Loss1: 1.1116, Average Loss2: 1.2256, Average Loss3: 1.2866
+Evaluation completed. Soft IoU: 1.1116, IoU1: 0.0125, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█| 188/188 [03:02<00:00,  1.██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                               | 70000/84952 [30:10:22<4:49:35,  1.16s/it, Loss=0.572]
+Evaluation completed. Average Loss1: 1.1083, Average Loss2: 1.2427, Average Loss3: 1.3279
+Evaluation completed. Soft IoU: 1.1083, IoU1: 0.0123, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█| 188/188 [03:35<00:00,  1.███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                          | 72500/84952 [31:13:46<6:25:57,  1.86s/it, Loss=0.666]
+Evaluation completed. Average Loss1: 1.1544, Average Loss2: 1.2860, Average Loss3: 1.3714
+Evaluation completed. Soft IoU: 1.1544, IoU1: 0.0121, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|█| 188/188 [02:56<00:00,  1.████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                     | 75000/84952 [32:18:45<2:59:10,  1.08s/it, Loss=0.496]
+Evaluation completed. Average Loss1: 1.0856, Average Loss2: 1.2076, Average Loss3: 1.2955
+Evaluation completed. Soft IoU: 1.0856, IoU1: 0.0127, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█| 188/188 [02:52<00:00,  1.██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                | 77500/84952 [33:21:33<2:30:33,  1.21s/it, Loss=0.628]
+Evaluation completed. Average Loss1: 1.1452, Average Loss2: 1.2909, Average Loss3: 1.3896
+Evaluation completed. Soft IoU: 1.1452, IoU1: 0.0124, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:20<00:00,  1.33it/s]██████████████████████████████████████████████████████████████████████▍          | 80000/84952 [34:28:12<1:28:19,  1.07s/it, Loss=0.344]
+Evaluation completed. Average Loss1: 1.0524, Average Loss2: 1.1484, Average Loss3: 1.1936
+Evaluation completed. Soft IoU: 1.0524, IoU1: 0.0128, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [04:29<00:00,  1.43s/it]███████████████████████████████████████████████████████████████████████████▊     | 82500/84952 [35:35:35<2:40:38,  3.93s/it, Loss=0.765]
+Evaluation completed. Average Loss1: 1.0461, Average Loss2: 1.1313, Average Loss3: 1.1703
+Evaluation completed. Soft IoU: 1.0461, IoU1: 0.0128, IoU2: 0.0044, IoU3: 0.0039
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step80000.pth
+Epoch 1: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 84952/84952 [36:38:18<00:00,  1.55s/it, Loss=0.356]
+Evaluation completed. Average Loss1: 1.1467, Average Loss2: 1.2912, Average Loss3: 1.3658
+Evaluation completed. Soft IoU: 1.1467, IoU1: 0.0123, IoU2: 0.0042, IoU3: 0.0037
+Starting epoch 2/100...
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:32<00:00,  1.23it/s]
+Evaluation completed. Average Loss1: 1.1101, Average Loss2: 1.2280, Average Loss3: 1.2938
+Evaluation completed. Soft IoU: 1.1101, IoU1: 0.0124, IoU2: 0.0042, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch1_step0.pth
+Evaluating: 100%|███████████████████████████████████████████████████████████████| 188/188 [02:45<00:00,  1.14it/s]
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:50<00:00,  1.11it/s]
+Evaluation completed. Average Loss1: 1.0862, Average Loss2: 1.2066, Average Loss3: 1.2746
+Evaluation completed. Soft IoU: 1.0862, IoU1: 0.0123, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|██████████████████| 188/188 [02:10<00:00,  1.44it/s]4952 [1:52:44<24:56:24,  1.12s/it, Loss=1.47]
+Evaluation completed. Average Loss1: 1.1340, Average Loss2: 1.2655, Average Loss3: 1.3348
+Evaluation completed. Soft IoU: 1.1340, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:26<00:00,  1.28it/s]
+Evaluation completed. Average Loss1: 1.1027, Average Loss2: 1.2296, Average Loss3: 1.3258
+Evaluation completed. Soft IoU: 1.1027, IoU1: 0.0126, IoU2: 0.0043, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:14<00:00,  1.04s/it]
+Evaluation completed. Average Loss1: 1.1722, Average Loss2: 1.3002, Average Loss3: 1.3600
+Evaluation completed. Soft IoU: 1.1722, IoU1: 0.0122, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:46<00:00,  1.13it/s]
+Evaluation completed. Average Loss1: 1.0509, Average Loss2: 1.1497, Average Loss3: 1.2078
+Evaluation completed. Soft IoU: 1.0509, IoU1: 0.0129, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:52<00:00,  1.09it/s]
+Evaluation completed. Average Loss1: 1.1103, Average Loss2: 1.2245, Average Loss3: 1.2689
+Evaluation completed. Soft IoU: 1.1103, IoU1: 0.0122, IoU2: 0.0044, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:24<00:00,  1.09s/it]
+Evaluation completed. Average Loss1: 1.0496, Average Loss2: 1.1476, Average Loss3: 1.2003
+Evaluation completed. Soft IoU: 1.0496, IoU1: 0.0125, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:25<00:00,  1.09s/it]
+Evaluation completed. Average Loss1: 1.1036, Average Loss2: 1.2151, Average Loss3: 1.2860
+Evaluation completed. Soft IoU: 1.1036, IoU1: 0.0125, IoU2: 0.0041, IoU3: 0.0036
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch1_step20000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:37<00:00,  1.19it/s]
+Evaluation completed. Average Loss1: 1.1564, Average Loss2: 1.2751, Average Loss3: 1.3164
+Evaluation completed. Soft IoU: 1.1564, IoU1: 0.0120, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:04<00:00,  1.02it/s]
+Evaluation completed. Average Loss1: 1.2442, Average Loss2: 1.4040, Average Loss3: 1.4835
+Evaluation completed. Soft IoU: 1.2442, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:48<00:00,  1.12it/s]
+Evaluation completed. Average Loss1: 1.1073, Average Loss2: 1.2345, Average Loss3: 1.2925
+Evaluation completed. Soft IoU: 1.1073, IoU1: 0.0124, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:28<00:00,  1.43s/it]
+Evaluation completed. Average Loss1: 1.0890, Average Loss2: 1.2021, Average Loss3: 1.2661
+Evaluation completed. Soft IoU: 1.0890, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:31<00:00,  1.24it/s]
+Evaluation completed. Average Loss1: 1.1251, Average Loss2: 1.2599, Average Loss3: 1.3458
+Evaluation completed. Soft IoU: 1.1251, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:53<00:00,  1.24s/it]
+Evaluation completed. Average Loss1: 1.1833, Average Loss2: 1.3147, Average Loss3: 1.3549
+Evaluation completed. Soft IoU: 1.1833, IoU1: 0.0116, IoU2: 0.0040, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:18<00:00,  1.05s/it]
+Evaluation completed. Average Loss1: 1.1120, Average Loss2: 1.2414, Average Loss3: 1.3133
+Evaluation completed. Soft IoU: 1.1120, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:37<00:00,  1.19it/s]
+Evaluation completed. Average Loss1: 1.0725, Average Loss2: 1.1570, Average Loss3: 1.1858
+Evaluation completed. Soft IoU: 1.0725, IoU1: 0.0126, IoU2: 0.0046, IoU3: 0.0044
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch1_step40000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:42<00:00,  1.15it/s]
+Evaluation completed. Average Loss1: 1.1390, Average Loss2: 1.2667, Average Loss3: 1.3349
+Evaluation completed. Soft IoU: 1.1390, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:10<00:00,  1.33s/it]
+Evaluation completed. Average Loss1: 1.1038, Average Loss2: 1.2255, Average Loss3: 1.2816
+Evaluation completed. Soft IoU: 1.1038, IoU1: 0.0123, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:25<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 1.0556, Average Loss2: 1.1432, Average Loss3: 1.1790
+Evaluation completed. Soft IoU: 1.0556, IoU1: 0.0126, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [12:14<00:00,  3.91s/it]
+Evaluation completed. Average Loss1: 1.0867, Average Loss2: 1.2076, Average Loss3: 1.2786
+Evaluation completed. Soft IoU: 1.0867, IoU1: 0.0128, IoU2: 0.0046, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:36<00:00,  1.20it/s]
+Evaluation completed. Average Loss1: 1.0667, Average Loss2: 1.1906, Average Loss3: 1.2835
+Evaluation completed. Soft IoU: 1.0667, IoU1: 0.0127, IoU2: 0.0044, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.1095, Average Loss2: 1.2477, Average Loss3: 1.3427
+Evaluation completed. Soft IoU: 1.1095, IoU1: 0.0120, IoU2: 0.0039, IoU3: 0.0035
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:27<00:00,  1.28it/s]
+Evaluation completed. Average Loss1: 1.0946, Average Loss2: 1.2237, Average Loss3: 1.2977
+Evaluation completed. Soft IoU: 1.0946, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:31<00:00,  1.24it/s]
+Evaluation completed. Average Loss1: 1.1009, Average Loss2: 1.2150, Average Loss3: 1.2959
+Evaluation completed. Soft IoU: 1.1009, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0039
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch1_step60000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:57<00:00,  1.26s/it]
+Evaluation completed. Average Loss1: 1.0865, Average Loss2: 1.1960, Average Loss3: 1.2511
+Evaluation completed. Soft IoU: 1.0865, IoU1: 0.0126, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:29<00:00,  1.25it/s]
+Evaluation completed. Average Loss1: 1.1113, Average Loss2: 1.2388, Average Loss3: 1.3237
+Evaluation completed. Soft IoU: 1.1113, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:18<00:00,  1.35it/s]
+Evaluation completed. Average Loss1: 1.0759, Average Loss2: 1.1829, Average Loss3: 1.2368
+Evaluation completed. Soft IoU: 1.0759, IoU1: 0.0129, IoU2: 0.0046, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:12<00:00,  1.42it/s]
+Evaluation completed. Average Loss1: 1.0716, Average Loss2: 1.1982, Average Loss3: 1.2713
+Evaluation completed. Soft IoU: 1.0716, IoU1: 0.0128, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:22<00:00,  1.08s/it]
+Evaluation completed. Average Loss1: 1.0442, Average Loss2: 1.1491, Average Loss3: 1.2071
+Evaluation completed. Soft IoU: 1.0442, IoU1: 0.0130, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:52<00:00,  1.09it/s]
+Evaluation completed. Average Loss1: 1.1007, Average Loss2: 1.2264, Average Loss3: 1.2864
+Evaluation completed. Soft IoU: 1.1007, IoU1: 0.0121, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:05<00:00,  1.30s/it]
+Evaluation completed. Average Loss1: 1.0915, Average Loss2: 1.2239, Average Loss3: 1.3131
+Evaluation completed. Soft IoU: 1.0915, IoU1: 0.0122, IoU2: 0.0040, IoU3: 0.0035
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [05:05<00:00,  1.62s/it]
+Evaluation completed. Average Loss1: 1.1036, Average Loss2: 1.2418, Average Loss3: 1.3305
+Evaluation completed. Soft IoU: 1.1036, IoU1: 0.0123, IoU2: 0.0042, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch1_step80000.pth
+Epoch 2: 100%|███████████████████████████████████████████████| 84952/84952 [35:35:13<00:00,  1.51s/it, Loss=0.847]                | 0/84952 [00:00<?, ?it/s]
+Evaluation completed. Average Loss1: 1.1002, Average Loss2: 1.2314, Average Loss3: 1.3405
+Evaluation completed. Soft IoU: 1.1002, IoU1: 0.0125, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:22<00:00,  1.31it/s]
+Starting epoch 3/100...
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:42<00:00,  1.16it/s]
+Evaluation completed. Average Loss1: 1.1443, Average Loss2: 1.2823, Average Loss3: 1.3668
+Evaluation completed. Soft IoU: 1.1443, IoU1: 0.0123, IoU2: 0.0042, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch2_step0.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:38<00:00,  1.19it/s]
+Evaluation completed. Average Loss1: 1.0915, Average Loss2: 1.2102, Average Loss3: 1.2849
+Evaluation completed. Soft IoU: 1.0915, IoU1: 0.0115, IoU2: 0.0040, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:53<00:00,  1.08it/s]
+Evaluation completed. Average Loss1: 1.0786, Average Loss2: 1.1970, Average Loss3: 1.2666
+Evaluation completed. Soft IoU: 1.0786, IoU1: 0.0126, IoU2: 0.0044, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:01<00:00,  1.03it/s]
+Evaluation completed. Average Loss1: 1.0797, Average Loss2: 1.1904, Average Loss3: 1.2508
+Evaluation completed. Soft IoU: 1.0797, IoU1: 0.0125, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:49<00:00,  1.11it/s]
+Evaluation completed. Average Loss1: 1.0981, Average Loss2: 1.1950, Average Loss3: 1.2335
+Evaluation completed. Soft IoU: 1.0981, IoU1: 0.0124, IoU2: 0.0045, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:11<00:00,  1.34s/it]
+Evaluation completed. Average Loss1: 1.0838, Average Loss2: 1.1887, Average Loss3: 1.2449
+Evaluation completed. Soft IoU: 1.0838, IoU1: 0.0124, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:51<00:00,  1.09it/s]
+Evaluation completed. Average Loss1: 1.0825, Average Loss2: 1.2009, Average Loss3: 1.2712
+Evaluation completed. Soft IoU: 1.0825, IoU1: 0.0124, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:20<00:00,  1.34it/s]
+Evaluation completed. Average Loss1: 1.0700, Average Loss2: 1.1682, Average Loss3: 1.2498
+Evaluation completed. Soft IoU: 1.0700, IoU1: 0.0128, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.1923, Average Loss2: 1.3332, Average Loss3: 1.4106
+Evaluation completed. Soft IoU: 1.1923, IoU1: 0.0119, IoU2: 0.0041, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch2_step20000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:19<00:00,  1.35it/s]
+Evaluation completed. Average Loss1: 1.1064, Average Loss2: 1.2270, Average Loss3: 1.2891
+Evaluation completed. Soft IoU: 1.1064, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [05:14<00:00,  1.67s/it]
+Evaluation completed. Average Loss1: 1.1422, Average Loss2: 1.2764, Average Loss3: 1.3547
+Evaluation completed. Soft IoU: 1.1422, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:44<00:00,  1.14it/s]
+Evaluation completed. Average Loss1: 1.1990, Average Loss2: 1.3571, Average Loss3: 1.4491
+Evaluation completed. Soft IoU: 1.1990, IoU1: 0.0119, IoU2: 0.0041, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:39<00:00,  1.17s/it]
+Evaluation completed. Average Loss1: 1.0619, Average Loss2: 1.1614, Average Loss3: 1.2126
+Evaluation completed. Soft IoU: 1.0619, IoU1: 0.0128, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:24<00:00,  1.30it/s]
+Evaluation completed. Average Loss1: 1.0616, Average Loss2: 1.1579, Average Loss3: 1.2170
+Evaluation completed. Soft IoU: 1.0616, IoU1: 0.0130, IoU2: 0.0048, IoU3: 0.0046
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:29<00:00,  1.26it/s]
+Evaluation completed. Average Loss1: 1.1938, Average Loss2: 1.3564, Average Loss3: 1.4817
+Evaluation completed. Soft IoU: 1.1938, IoU1: 0.0121, IoU2: 0.0041, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:52<00:00,  1.09it/s]
+Evaluation completed. Average Loss1: 1.0609, Average Loss2: 1.1747, Average Loss3: 1.2615
+Evaluation completed. Soft IoU: 1.0609, IoU1: 0.0130, IoU2: 0.0045, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:25<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 1.1854, Average Loss2: 1.3444, Average Loss3: 1.4267
+Evaluation completed. Soft IoU: 1.1854, IoU1: 0.0120, IoU2: 0.0040, IoU3: 0.0036
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch2_step40000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:54<00:00,  1.08it/s]
+Evaluation completed. Average Loss1: 1.1463, Average Loss2: 1.2845, Average Loss3: 1.3555
+Evaluation completed. Soft IoU: 1.1463, IoU1: 0.0124, IoU2: 0.0044, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:40<00:00,  1.17it/s]
+Evaluation completed. Average Loss1: 1.1258, Average Loss2: 1.2251, Average Loss3: 1.2690
+Evaluation completed. Soft IoU: 1.1258, IoU1: 0.0121, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:25<00:00,  1.41s/it]
+Evaluation completed. Average Loss1: 1.1771, Average Loss2: 1.3147, Average Loss3: 1.3865
+Evaluation completed. Soft IoU: 1.1771, IoU1: 0.0118, IoU2: 0.0040, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:49<00:00,  1.22s/it]
+Evaluation completed. Average Loss1: 1.1667, Average Loss2: 1.3032, Average Loss3: 1.4042
+Evaluation completed. Soft IoU: 1.1667, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:12<00:00,  1.03s/it]
+Evaluation completed. Average Loss1: 1.1711, Average Loss2: 1.3255, Average Loss3: 1.4161
+Evaluation completed. Soft IoU: 1.1711, IoU1: 0.0120, IoU2: 0.0041, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:50<00:00,  1.10it/s]
+Evaluation completed. Average Loss1: 1.1619, Average Loss2: 1.3024, Average Loss3: 1.3695
+Evaluation completed. Soft IoU: 1.1619, IoU1: 0.0122, IoU2: 0.0043, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:30<00:00,  1.25it/s]
+Evaluation completed. Average Loss1: 1.0678, Average Loss2: 1.1611, Average Loss3: 1.2050
+Evaluation completed. Soft IoU: 1.0678, IoU1: 0.0130, IoU2: 0.0047, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:23<00:00,  1.31it/s]
+Evaluation completed. Average Loss1: 1.0518, Average Loss2: 1.1636, Average Loss3: 1.2405
+Evaluation completed. Soft IoU: 1.0518, IoU1: 0.0130, IoU2: 0.0044, IoU3: 0.0039
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch2_step60000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:40<00:00,  1.49s/it]
+Evaluation completed. Average Loss1: 1.0864, Average Loss2: 1.1952, Average Loss3: 1.2565
+Evaluation completed. Soft IoU: 1.0864, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:55<00:00,  1.07it/s]
+Evaluation completed. Average Loss1: 1.1424, Average Loss2: 1.2829, Average Loss3: 1.3859
+Evaluation completed. Soft IoU: 1.1424, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:59<00:00,  1.05it/s]
+Evaluation completed. Average Loss1: 1.0350, Average Loss2: 1.1311, Average Loss3: 1.2083
+Evaluation completed. Soft IoU: 1.0350, IoU1: 0.0132, IoU2: 0.0048, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:27<00:00,  1.10s/it]
+Evaluation completed. Average Loss1: 1.0441, Average Loss2: 1.1566, Average Loss3: 1.2286
+Evaluation completed. Soft IoU: 1.0441, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:36<00:00,  1.20it/s]
+Evaluation completed. Average Loss1: 1.0597, Average Loss2: 1.1751, Average Loss3: 1.2710
+Evaluation completed. Soft IoU: 1.0597, IoU1: 0.0127, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:50<00:00,  1.54s/it]
+Evaluation completed. Average Loss1: 1.0691, Average Loss2: 1.1774, Average Loss3: 1.2465
+Evaluation completed. Soft IoU: 1.0691, IoU1: 0.0128, IoU2: 0.0046, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:26<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 1.0823, Average Loss2: 1.1956, Average Loss3: 1.2521
+Evaluation completed. Soft IoU: 1.0823, IoU1: 0.0129, IoU2: 0.0046, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:53<00:00,  1.08it/s]
+Evaluation completed. Average Loss1: 1.0884, Average Loss2: 1.1959, Average Loss3: 1.2500
+Evaluation completed. Soft IoU: 1.0884, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0041
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch2_step80000.pth
+Epoch 3: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 84952/84952 [32:37:35<00:00,  1.38s/it, Loss=0.279]
+Evaluation completed. Average Loss1: 1.0620, Average Loss2: 1.1666, Average Loss3: 1.2186
+Evaluation completed. Soft IoU: 1.0620, IoU1: 0.0133, IoU2: 0.0048, IoU3: 0.0044
+Starting epoch 4/100...
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:51<00:00,  1.55s/it]
+Evaluation completed. Average Loss1: 1.1088, Average Loss2: 1.2408, Average Loss3: 1.3113
+Evaluation completed. Soft IoU: 1.1088, IoU1: 0.0125, IoU2: 0.0044, IoU3: 0.0042
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch3_step0.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:04<00:00,  1.30s/it]
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:30<00:00,  1.25it/s]
+Evaluation completed. Average Loss1: 1.1208, Average Loss2: 1.2580, Average Loss3: 1.3453
+Evaluation completed. Soft IoU: 1.1208, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:23<00:00,  1.08s/it]
+Evaluation completed. Average Loss1: 1.0726, Average Loss2: 1.1999, Average Loss3: 1.2882
+Evaluation completed. Soft IoU: 1.0726, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:19<00:00,  1.06s/it]
+Evaluation completed. Average Loss1: 1.0925, Average Loss2: 1.2231, Average Loss3: 1.3114
+Evaluation completed. Soft IoU: 1.0925, IoU1: 0.0133, IoU2: 0.0048, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:03<00:00,  1.03it/s]
+Evaluation completed. Average Loss1: 1.1366, Average Loss2: 1.2813, Average Loss3: 1.3809
+Evaluation completed. Soft IoU: 1.1366, IoU1: 0.0127, IoU2: 0.0046, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:58<00:00,  1.27s/it]
+Evaluation completed. Average Loss1: 1.1225, Average Loss2: 1.2666, Average Loss3: 1.3484
+Evaluation completed. Soft IoU: 1.1225, IoU1: 0.0127, IoU2: 0.0046, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.0666, Average Loss2: 1.1707, Average Loss3: 1.2231
+Evaluation completed. Soft IoU: 1.0666, IoU1: 0.0130, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:34<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.1538, Average Loss2: 1.3006, Average Loss3: 1.3788
+Evaluation completed. Soft IoU: 1.1538, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.1624, Average Loss2: 1.3133, Average Loss3: 1.3968
+Evaluation completed. Soft IoU: 1.1624, IoU1: 0.0122, IoU2: 0.0041, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch3_step20000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:28<00:00,  1.11s/it]
+Evaluation completed. Average Loss1: 1.0861, Average Loss2: 1.2171, Average Loss3: 1.3109
+Evaluation completed. Soft IoU: 1.0861, IoU1: 0.0133, IoU2: 0.0049, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [05:16<00:00,  1.68s/it]
+Evaluation completed. Average Loss1: 1.0643, Average Loss2: 1.1776, Average Loss3: 1.2455
+Evaluation completed. Soft IoU: 1.0643, IoU1: 0.0131, IoU2: 0.0047, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:54<00:00,  1.08it/s]
+Evaluation completed. Average Loss1: 1.1598, Average Loss2: 1.3063, Average Loss3: 1.3864
+Evaluation completed. Soft IoU: 1.1598, IoU1: 0.0126, IoU2: 0.0045, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:14<00:00,  1.35s/it]
+Evaluation completed. Average Loss1: 1.0935, Average Loss2: 1.2107, Average Loss3: 1.2703
+Evaluation completed. Soft IoU: 1.0935, IoU1: 0.0131, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:24<00:00,  1.09s/it]
+Evaluation completed. Average Loss1: 1.1154, Average Loss2: 1.2442, Average Loss3: 1.3180
+Evaluation completed. Soft IoU: 1.1154, IoU1: 0.0133, IoU2: 0.0049, IoU3: 0.0045
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:20<00:00,  1.06s/it]
+Evaluation completed. Average Loss1: 1.0770, Average Loss2: 1.1977, Average Loss3: 1.2880
+Evaluation completed. Soft IoU: 1.0770, IoU1: 0.0130, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:22<00:00,  1.08s/it]
+Evaluation completed. Average Loss1: 1.0631, Average Loss2: 1.1853, Average Loss3: 1.2726
+Evaluation completed. Soft IoU: 1.0631, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:56<00:00,  1.07it/s]
+Evaluation completed. Average Loss1: 1.2231, Average Loss2: 1.3804, Average Loss3: 1.4608
+Evaluation completed. Soft IoU: 1.2231, IoU1: 0.0124, IoU2: 0.0044, IoU3: 0.0039
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch3_step40000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:19<00:00,  1.38s/it]
+Evaluation completed. Average Loss1: 1.1570, Average Loss2: 1.3095, Average Loss3: 1.4310
+Evaluation completed. Soft IoU: 1.1570, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:49<00:00,  1.22s/it]
+Evaluation completed. Average Loss1: 1.2844, Average Loss2: 1.4412, Average Loss3: 1.5249
+Evaluation completed. Soft IoU: 1.2844, IoU1: 0.0121, IoU2: 0.0044, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:16<00:00,  1.37it/s]
+Evaluation completed. Average Loss1: 1.0886, Average Loss2: 1.2101, Average Loss3: 1.2890
+Evaluation completed. Soft IoU: 1.0886, IoU1: 0.0133, IoU2: 0.0048, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:12<00:00,  1.42it/s]
+Evaluation completed. Average Loss1: 1.1117, Average Loss2: 1.2442, Average Loss3: 1.3294
+Evaluation completed. Soft IoU: 1.1117, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:25<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 1.1556, Average Loss2: 1.3011, Average Loss3: 1.3812
+Evaluation completed. Soft IoU: 1.1556, IoU1: 0.0127, IoU2: 0.0047, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:01<00:00,  1.04it/s]
+Evaluation completed. Average Loss1: 1.0554, Average Loss2: 1.1697, Average Loss3: 1.2572
+Evaluation completed. Soft IoU: 1.0554, IoU1: 0.0135, IoU2: 0.0048, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:27<00:00,  1.27it/s]
+Evaluation completed. Average Loss1: 1.1494, Average Loss2: 1.3022, Average Loss3: 1.4138
+Evaluation completed. Soft IoU: 1.1494, IoU1: 0.0131, IoU2: 0.0049, IoU3: 0.0046
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:49<00:00,  1.11it/s]
+Evaluation completed. Average Loss1: 1.1850, Average Loss2: 1.3504, Average Loss3: 1.4546
+Evaluation completed. Soft IoU: 1.1850, IoU1: 0.0126, IoU2: 0.0043, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch3_step60000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:11<00:00,  1.43it/s]
+Evaluation completed. Average Loss1: 1.0778, Average Loss2: 1.1951, Average Loss3: 1.2854
+Evaluation completed. Soft IoU: 1.0778, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:50<00:00,  1.23s/it]
+Evaluation completed. Average Loss1: 1.0788, Average Loss2: 1.2135, Average Loss3: 1.3124
+Evaluation completed. Soft IoU: 1.0788, IoU1: 0.0131, IoU2: 0.0046, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:23<00:00,  1.08s/it]
+Evaluation completed. Average Loss1: 1.1881, Average Loss2: 1.3503, Average Loss3: 1.4472
+Evaluation completed. Soft IoU: 1.1881, IoU1: 0.0124, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:18<00:00,  1.05s/it]
+Evaluation completed. Average Loss1: 1.2958, Average Loss2: 1.4778, Average Loss3: 1.6130
+Evaluation completed. Soft IoU: 1.2958, IoU1: 0.0122, IoU2: 0.0041, IoU3: 0.0036
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:48<00:00,  1.21s/it]
+Evaluation completed. Average Loss1: 1.0878, Average Loss2: 1.2111, Average Loss3: 1.3024
+Evaluation completed. Soft IoU: 1.0878, IoU1: 0.0131, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:23<00:00,  1.31it/s]
+Evaluation completed. Average Loss1: 1.0999, Average Loss2: 1.2349, Average Loss3: 1.3260
+Evaluation completed. Soft IoU: 1.0999, IoU1: 0.0134, IoU2: 0.0048, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:51<00:00,  1.23s/it]
+Evaluation completed. Average Loss1: 1.0743, Average Loss2: 1.1801, Average Loss3: 1.2464
+Evaluation completed. Soft IoU: 1.0743, IoU1: 0.0133, IoU2: 0.0048, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:45<00:00,  1.52s/it]
+Evaluation completed. Average Loss1: 1.0762, Average Loss2: 1.1888, Average Loss3: 1.2674
+Evaluation completed. Soft IoU: 1.0762, IoU1: 0.0123, IoU2: 0.0044, IoU3: 0.0038
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch3_step80000.pth
+Epoch 4: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 84952/84952 [32:30:51<00:00,  1.38s/it, Loss=0.296]
+Evaluation completed. Average Loss1: 1.1188, Average Loss2: 1.2580, Average Loss3: 1.3491
+Evaluation completed. Soft IoU: 1.1188, IoU1: 0.0129, IoU2: 0.0046, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:20<00:00,  1.34it/s]
+Starting epoch 5/100...
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:07<00:00,  1.00it/s]
+Evaluation completed. Average Loss1: 1.0883, Average Loss2: 1.2218, Average Loss3: 1.3086
+Evaluation completed. Soft IoU: 1.0883, IoU1: 0.0131, IoU2: 0.0049, IoU3: 0.0044
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch4_step0.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:46<00:00,  1.13it/s]
+Evaluation completed. Average Loss1: 1.0251, Average Loss2: 1.1219, Average Loss3: 1.2042
+Evaluation completed. Soft IoU: 1.0251, IoU1: 0.0137, IoU2: 0.0051, IoU3: 0.0046
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:31<00:00,  1.24it/s]
+Evaluation completed. Average Loss1: 1.1047, Average Loss2: 1.2354, Average Loss3: 1.3336
+Evaluation completed. Soft IoU: 1.1047, IoU1: 0.0134, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:32<00:00,  1.13s/it]
+Evaluation completed. Average Loss1: 1.0445, Average Loss2: 1.1495, Average Loss3: 1.2082
+Evaluation completed. Soft IoU: 1.0445, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.0600, Average Loss2: 1.1665, Average Loss3: 1.2311
+Evaluation completed. Soft IoU: 1.0600, IoU1: 0.0131, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:07<00:00,  1.31s/it]
+Evaluation completed. Average Loss1: 1.0842, Average Loss2: 1.1785, Average Loss3: 1.2119
+Evaluation completed. Soft IoU: 1.0842, IoU1: 0.0130, IoU2: 0.0048, IoU3: 0.0044
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:23<00:00,  1.08s/it]
+Evaluation completed. Average Loss1: 1.0417, Average Loss2: 1.1495, Average Loss3: 1.2221
+Evaluation completed. Soft IoU: 1.0417, IoU1: 0.0131, IoU2: 0.0046, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:18<00:00,  1.38s/it]
+Evaluation completed. Average Loss1: 1.0915, Average Loss2: 1.1902, Average Loss3: 1.2758
+Evaluation completed. Soft IoU: 1.0915, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:35<00:00,  1.15s/it]
+Evaluation completed. Average Loss1: 1.0345, Average Loss2: 1.1131, Average Loss3: 1.1681
+Evaluation completed. Soft IoU: 1.0345, IoU1: 0.0135, IoU2: 0.0049, IoU3: 0.0044
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch4_step20000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:40<00:00,  1.17it/s]
+Evaluation completed. Average Loss1: 1.0638, Average Loss2: 1.1899, Average Loss3: 1.2602
+Evaluation completed. Soft IoU: 1.0638, IoU1: 0.0135, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:39<00:00,  1.17s/it]
+Evaluation completed. Average Loss1: 1.2198, Average Loss2: 1.3827, Average Loss3: 1.4739
+Evaluation completed. Soft IoU: 1.2198, IoU1: 0.0124, IoU2: 0.0044, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:08<00:00,  1.00s/it]
+Evaluation completed. Average Loss1: 1.1598, Average Loss2: 1.3251, Average Loss3: 1.4647
+Evaluation completed. Soft IoU: 1.1598, IoU1: 0.0132, IoU2: 0.0047, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:32<00:00,  1.23it/s]
+Evaluation completed. Average Loss1: 1.0652, Average Loss2: 1.1958, Average Loss3: 1.2975
+Evaluation completed. Soft IoU: 1.0652, IoU1: 0.0132, IoU2: 0.0046, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:37<00:00,  1.20it/s]
+Evaluation completed. Average Loss1: 1.0400, Average Loss2: 1.1450, Average Loss3: 1.2215
+Evaluation completed. Soft IoU: 1.0400, IoU1: 0.0136, IoU2: 0.0050, IoU3: 0.0045
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:23<00:00,  1.31it/s]
+Evaluation completed. Average Loss1: 1.0480, Average Loss2: 1.1565, Average Loss3: 1.2179
+Evaluation completed. Soft IoU: 1.0480, IoU1: 0.0130, IoU2: 0.0045, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:33<00:00,  1.14s/it]
+Evaluation completed. Average Loss1: 1.1819, Average Loss2: 1.3174, Average Loss3: 1.3727
+Evaluation completed. Soft IoU: 1.1819, IoU1: 0.0125, IoU2: 0.0046, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:35<00:00,  1.21it/s]
+Evaluation completed. Average Loss1: 1.1308, Average Loss2: 1.2541, Average Loss3: 1.3057
+Evaluation completed. Soft IoU: 1.1308, IoU1: 0.0128, IoU2: 0.0047, IoU3: 0.0043
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch4_step40000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:38<00:00,  1.16s/it]
+Evaluation completed. Average Loss1: 1.1866, Average Loss2: 1.3538, Average Loss3: 1.4846
+Evaluation completed. Soft IoU: 1.1866, IoU1: 0.0128, IoU2: 0.0046, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:37<00:00,  1.48s/it]
+Evaluation completed. Average Loss1: 1.1572, Average Loss2: 1.3178, Average Loss3: 1.4381
+Evaluation completed. Soft IoU: 1.1572, IoU1: 0.0128, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:41<00:00,  1.16it/s]
+Evaluation completed. Average Loss1: 1.2021, Average Loss2: 1.3734, Average Loss3: 1.4644
+Evaluation completed. Soft IoU: 1.2021, IoU1: 0.0124, IoU2: 0.0043, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:05<00:00,  1.02it/s]
+Evaluation completed. Average Loss1: 1.0717, Average Loss2: 1.1976, Average Loss3: 1.2937
+Evaluation completed. Soft IoU: 1.0717, IoU1: 0.0129, IoU2: 0.0047, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:29<00:00,  1.11s/it]
+Evaluation completed. Average Loss1: 1.1642, Average Loss2: 1.3273, Average Loss3: 1.4853
+Evaluation completed. Soft IoU: 1.1642, IoU1: 0.0130, IoU2: 0.0046, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:25<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 1.0844, Average Loss2: 1.2146, Average Loss3: 1.2935
+Evaluation completed. Soft IoU: 1.0844, IoU1: 0.0130, IoU2: 0.0047, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:50<00:00,  1.10it/s]
+Evaluation completed. Average Loss1: 1.1964, Average Loss2: 1.3693, Average Loss3: 1.4828
+Evaluation completed. Soft IoU: 1.1964, IoU1: 0.0128, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:29<00:00,  1.25it/s]
+Evaluation completed. Average Loss1: 1.0721, Average Loss2: 1.1683, Average Loss3: 1.2177
+Evaluation completed. Soft IoU: 1.0721, IoU1: 0.0132, IoU2: 0.0048, IoU3: 0.0044
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch4_step60000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:23<00:00,  1.31it/s]
+Evaluation completed. Average Loss1: 1.0451, Average Loss2: 1.1383, Average Loss3: 1.1939
+Evaluation completed. Soft IoU: 1.0451, IoU1: 0.0137, IoU2: 0.0051, IoU3: 0.0046
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:26<00:00,  1.10s/it]
+Evaluation completed. Average Loss1: 1.1077, Average Loss2: 1.2409, Average Loss3: 1.3432
+Evaluation completed. Soft IoU: 1.1077, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:09<00:00,  1.45it/s]
+Evaluation completed. Average Loss1: 1.1368, Average Loss2: 1.2862, Average Loss3: 1.3781
+Evaluation completed. Soft IoU: 1.1368, IoU1: 0.0128, IoU2: 0.0046, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:43<00:00,  1.51s/it]
+Evaluation completed. Average Loss1: 1.0811, Average Loss2: 1.2060, Average Loss3: 1.2925
+Evaluation completed. Soft IoU: 1.0811, IoU1: 0.0126, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:41<00:00,  1.17it/s]
+Evaluation completed. Average Loss1: 1.1051, Average Loss2: 1.2502, Average Loss3: 1.3772
+Evaluation completed. Soft IoU: 1.1051, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [06:50<00:00,  2.18s/it]
+Evaluation completed. Average Loss1: 1.0845, Average Loss2: 1.2169, Average Loss3: 1.3120
+Evaluation completed. Soft IoU: 1.0845, IoU1: 0.0132, IoU2: 0.0045, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:28<00:00,  1.26it/s]
+Evaluation completed. Average Loss1: 1.2240, Average Loss2: 1.4208, Average Loss3: 1.5553
+Evaluation completed. Soft IoU: 1.2240, IoU1: 0.0126, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:56<00:00,  1.06it/s]
+Evaluation completed. Average Loss1: 1.1058, Average Loss2: 1.2560, Average Loss3: 1.3962
+Evaluation completed. Soft IoU: 1.1058, IoU1: 0.0130, IoU2: 0.0044, IoU3: 0.0036
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch4_step80000.pth
+Epoch 5: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 84952/84952 [32:33:29<00:00,  1.38s/it, Loss=0.318]
+Evaluation completed. Average Loss1: 1.0469, Average Loss2: 1.1593, Average Loss3: 1.2625
+Evaluation completed. Soft IoU: 1.0469, IoU1: 0.0134, IoU2: 0.0048, IoU3: 0.0043
+Starting epoch 6/100...
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:24<00:00,  1.30it/s]
+Evaluation completed. Average Loss1: 1.0771, Average Loss2: 1.1905, Average Loss3: 1.3057
+Evaluation completed. Soft IoU: 1.0771, IoU1: 0.0133, IoU2: 0.0049, IoU3: 0.0044
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch5_step0.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:13<00:00,  1.03s/it]
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:33<00:00,  1.22it/s]
+Evaluation completed. Average Loss1: 1.0859, Average Loss2: 1.2172, Average Loss3: 1.3219
+Evaluation completed. Soft IoU: 1.0859, IoU1: 0.0134, IoU2: 0.0048, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:14<00:00,  1.36s/it]
+Evaluation completed. Average Loss1: 1.1140, Average Loss2: 1.2450, Average Loss3: 1.3341
+Evaluation completed. Soft IoU: 1.1140, IoU1: 0.0123, IoU2: 0.0043, IoU3: 0.0038
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:37<00:00,  1.15s/it]
+Evaluation completed. Average Loss1: 1.1032, Average Loss2: 1.2390, Average Loss3: 1.3440
+Evaluation completed. Soft IoU: 1.1032, IoU1: 0.0132, IoU2: 0.0046, IoU3: 0.0041
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:41<00:00,  1.16it/s]
+Evaluation completed. Average Loss1: 1.1474, Average Loss2: 1.2973, Average Loss3: 1.4146
+Evaluation completed. Soft IoU: 1.1474, IoU1: 0.0127, IoU2: 0.0045, IoU3: 0.0040
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:19<00:00,  1.35it/s]
+Evaluation completed. Average Loss1: 1.2576, Average Loss2: 1.4358, Average Loss3: 1.5606
+Evaluation completed. Soft IoU: 1.2576, IoU1: 0.0120, IoU2: 0.0042, IoU3: 0.0037
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:18<00:00,  1.36it/s]
+Evaluation completed. Average Loss1: 1.1364, Average Loss2: 1.2660, Average Loss3: 1.3359
+Evaluation completed. Soft IoU: 1.1364, IoU1: 0.0127, IoU2: 0.0044, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:11<00:00,  1.34s/it]
+Evaluation completed. Average Loss1: 1.1300, Average Loss2: 1.2666, Average Loss3: 1.3380
+Evaluation completed. Soft IoU: 1.1300, IoU1: 0.0132, IoU2: 0.0048, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [04:47<00:00,  1.53s/it]
+Evaluation completed. Average Loss1: 1.0922, Average Loss2: 1.2366, Average Loss3: 1.3314
+Evaluation completed. Soft IoU: 1.0922, IoU1: 0.0126, IoU2: 0.0043, IoU3: 0.0037
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch5_step20000.pth
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:17<00:00,  1.37it/s]
+Evaluation completed. Average Loss1: 1.1547, Average Loss2: 1.3082, Average Loss3: 1.3946
+Evaluation completed. Soft IoU: 1.1547, IoU1: 0.0129, IoU2: 0.0046, IoU3: 0.0042
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:31<00:00,  1.24it/s]
+Evaluation completed. Average Loss1: 1.1467, Average Loss2: 1.2963, Average Loss3: 1.3832
+Evaluation completed. Soft IoU: 1.1467, IoU1: 0.0129, IoU2: 0.0045, IoU3: 0.0039
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:45<00:00,  1.13it/s]
+Evaluation completed. Average Loss1: 1.0362, Average Loss2: 1.1452, Average Loss3: 1.2309
+Evaluation completed. Soft IoU: 1.0362, IoU1: 0.0133, IoU2: 0.0049, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:13<00:00,  1.03s/it]
+Evaluation completed. Average Loss1: 1.1130, Average Loss2: 1.2551, Average Loss3: 1.3593
+Evaluation completed. Soft IoU: 1.1130, IoU1: 0.0131, IoU2: 0.0047, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:18<00:00,  1.05s/it]
+Evaluation completed. Average Loss1: 1.0811, Average Loss2: 1.2145, Average Loss3: 1.3017
+Evaluation completed. Soft IoU: 1.0811, IoU1: 0.0133, IoU2: 0.0048, IoU3: 0.0043
+Evaluating: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:39<00:00,  1.17s/it]
+Evaluation completed. Average Loss1: 1.1832, Average Loss2: 1.3221, Average Loss3: 1.4112
+Evaluation completed. Soft IoU: 1.1832, IoU1: 0.0123, IoU2: 0.0044, IoU3: 0.0039
+Evaluating:   0%|                                                                                                                                                                                                                                                                         | 0/188 [00:03<?, ?it/s]
+Evaluation completed. Average Loss1: 1.0328, Average Loss2: 1.1437, Average Loss3: 1.2425
+Evaluation completed. Soft IoU: 1.0328, IoU1: 0.0134, IoU2: 0.0048, IoU3: 0.0042
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x7f458484a5f0>            | 40000/84952 [14:32:23<16:41:02,  1.34s/it, Loss=1.47]
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1604, in __del__
+    self._shutdown_workers()
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1568, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+  File "/root/miniconda3/envs/rewas/lib/python3.10/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt:
+Traceback (most recent call last):
+  File "/workspace/rewas/./train_miil.py", line 357, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 274, in main
+    avg_loss1, avg_loss2, avg_loss3, avg_iou1, avg_iou2, avg_iou3 = evaluate(phi, video_encoder, test_loader, synchformer_cfg.training.use_half_precision)
+  File "/workspace/rewas/evaluate_cam.py", line 46, in evaluate
+    for step, batch in enumerate(tqdm(dataloader, desc="Evaluating", dynamic_ncols=False)):
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/accelerate/data_loader.py", line 552, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1402, in _get_data
+    success, data = self._try_get_data()
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1243, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/threading.py", line 324, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt

@@ -8,6 +8,7 @@ import multiprocessing
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import time
 
 from scipy.signal import savgol_filter
 
@@ -16,16 +17,16 @@ from encoder.encoder_utils import get_transforms, get_pretrained
 from audioldm.rewas import ReWaS
 from audioldm.utilities.audio import read_wav_file
 from audioldm.utilities.model_util import set_cond_audio, set_cond_text
-from audioldm.utilities.data.utils import re_encode_video, get_video_and_audio, save_video
+from audioldm.utilities.data.utils import re_encode_video, get_video_and_audio, process_video_and_audio, process_video_with_frame
 
 
 def make_batch_for_control_to_audio(
     text, videos, control_type, synchformer_cfg,  
-    waveform=None, fbank=None, batchsize=1, local_rank = None, re_encode=True):
+    waveform=None, fbank=None, batchsize=1, local_rank = None, re_encode=True, duration=None, mode="train"):
     
     if not type(text)==list:
-        text = [text] * batchsize
-        video = [videos] * batchsize
+        text = [text] 
+        video = [videos] 
 
     if batchsize < 1:
         print("Warning: Batchsize must be at least 1. Batchsize is set to .")
@@ -51,12 +52,15 @@ def make_batch_for_control_to_audio(
     
     for idx, video in enumerate(videos):
         
-        x = get_input(
+        x, item = get_input(
             video,
             synchformer_cfg,
             control_type=control_type,
+            duration=duration,
             local_rank=local_rank,
-            re_encode=re_encode)
+            re_encode=re_encode,
+            mode=mode
+            )
 
         model_inputs.append(x)
             
@@ -71,34 +75,30 @@ def make_batch_for_control_to_audio(
             "model_inputs": model_inputs,
             # "energy":control,
             "log_mel_spec": fbank,
-            "stft": torch.zeros((batchsize, 1024, 512)) # Not used in inference
+            "stft": torch.zeros((batchsize, 1024, 512)), # Not used in inference
+            "start_sec": item['start_sec'],
+            "end_sec": item['end_sec'],
+            "attention_mask": item['mask'],
+            "v_ranges": item['v_ranges']
 
     }
     return batch
 
 def rewas_generation(
-        latent_diffusion,
         text,
         videos,
         control_type,
-        synchformer_exp,
         synchformer_cfg,
-        video_encoder,
-        phi,
         original_audio_file_path = None,
         seed=42,
-        ddim_steps=200,
         duration=5,
         batchsize=1,
-        guidance_scale=2.5,
-        n_candidate_gen_per_text=1,
         re_encode=True,
-        config=None,
-        save_path=None,
-        local_rank=None
+        local_rank=None,
+        mode="train"
     ):
     
-    seed_everything(int(seed))
+    #seed_everything(int(seed))
     
     waveform = None
     
@@ -112,59 +112,35 @@ def rewas_generation(
     if not type(videos)==list:
         videos = [videos]
 
+    #start_sec, end_sec 정보 여기 있음
     batch = make_batch_for_control_to_audio(
         text, videos, control_type, synchformer_cfg,
-        waveform=waveform, batchsize=batchsize, local_rank=local_rank, re_encode=re_encode)
+        waveform=waveform, batchsize=batchsize, local_rank=local_rank, re_encode=re_encode, duration=duration, mode=mode) 
+    
+    #print(f"start_sec: {batch['start_sec']}, end_sec: {batch['end_sec']}")
+    return batch
+    # x = hint = batch['model_inputs'].to(f'cuda:{local_rank}')
+    # y = AudioCAM[:, start_secx100:end_secx100]
 
-    with torch.set_grad_enabled(False):
-        with torch.autocast('cuda', enabled=synchformer_cfg.training.use_half_precision):
-            hint = batch['model_inputs'].to(f'cuda:{local_rank}')
-            hint = hint.permute(0, 1, 3, 2, 4, 5) # (B, S, C, Tv, H, W)
-            hint = video_encoder(hint, for_loop=False)[0] # if for_loop = True: Segment is not combined with batch
-            B, S, tv, D = hint.shape
-            hint = hint.view(B, S*tv, D)
+########################################################### 여기까지가 dataset + dataloader 함수부분 #########################################################################
+# 지금 안된건 segment개수가 14로 고정되어있다는점
 
-        hint = phi(hint.float())
-        hint = hint.squeeze(2)
+
+    # with torch.set_grad_enabled(False):
+    #     with torch.autocast('cuda', enabled=synchformer_cfg.training.use_half_precision):
+    #         hint = batch['model_inputs'].to(f'cuda:{local_rank}')
+    #         hint = hint.permute(0, 1, 3, 2, 4, 5) # (B, S, C, Tv, H, W)
+    #         hint = video_encoder(hint, for_loop=False)[0] # if for_loop = True: Segment is not combined with batch
+    #         B, S, tv, D = hint.shape
+    #         hint = hint.view(B, S*tv, D)
+
+    #     hint = phi(hint.float())
+    #     hint = hint.squeeze(2)
         
-        control = savgol_filter(hint.cpu(), 9, 2)
-        control = torch.tensor(control)
-        control = F.interpolate(control.unsqueeze(1), size=512)
-        control = torch.tensor(control).squeeze(1)
-
-    batch["energy"] = control
-    
-    latent_diffusion.latent_t_size = int(duration * 25.6) # duration to latent size
-    
-    if waveform is not None:
-        print(f"Generate audio that has similar content as {original_audio_file_path}")
-        latent_diffusion = set_cond_audio(latent_diffusion)
-    else:
-        latent_diffusion = set_cond_text(latent_diffusion)
+    #     print("hint.shape: ", hint.shape) ##
+       
 
 
-    with torch.no_grad():
-        waveform, waveform_save_path = latent_diffusion.generate_sample(
-            [batch],
-            unconditional_guidance_scale=guidance_scale,
-            ddim_steps=ddim_steps,
-            n_gen=n_candidate_gen_per_text,
-            duration=duration,
-            save_path = save_path,
-            control_plt = True
-        )
-
-    num_processes = multiprocessing.cpu_count()
-    pool = multiprocessing.Pool(processes=num_processes)
-
-    if n_candidate_gen_per_text > 1:
-        videos = videos * n_candidate_gen_per_text
-
-    args = [(path, vid) for path, vid in zip(waveform_save_path, videos)]
-    pool.starmap(save_video, args)
-
-    pool.close()
-    pool.join()
 
 
 def build_control_model(
@@ -219,7 +195,8 @@ def get_input(
         in_size: int = 256,
         duration: int = 5,
         local_rank = None,
-        re_encode=True
+        re_encode=True,
+        mode="train"
         ):
     
     if video_path is None:
@@ -227,22 +204,36 @@ def get_input(
 
     if control_type == "energy_video":
 
-        if re_encode:
-            video_path = re_encode_video('.cache', video_path, video_fps, audio_sr, in_size)
-        
-        rgb, audio, meta = get_video_and_audio(
-            video_path, get_meta=True, duration=duration, start_sec=0, end_sec=None, random_start=0)
-
+        # if re_encode:
+        #     video_path = re_encode_video('.cache', video_path, video_fps, audio_sr, in_size)
+        #print("duration: ", duration)
+        # rgb, audio, meta, start_sec, end_sec = get_video_and_audio(
+        #     video_path, get_meta=True, duration=duration, target_fps=25, random_start=True)
+        start_time = time.time()
+        rgb, audio, meta, start_index, end_index, start_sec, end_sec = process_video_with_frame(video_path, target_fps=25, mode=mode)
+        end_time = time.time()
+        #print("process_video time: ", end_time - start_time)
         item_temp = dict(
-                video=rgb, audio=audio, meta=meta, path=video_path, split='test',
-                targets={'v_start_i_sec': 0.0, 'offset_sec': 0.0 },
+                video=rgb, audio=audio, meta=meta, path=video_path, split=mode, start_index=start_index, end_index=end_index, start_sec=start_sec, end_sec=end_sec,
+                targets={'v_start_i_sec': 0.0, 'offset_sec': 0.0 }
             )
-
-        item_temp = get_transforms(synchformer_cfg, ['test'])['test'](item_temp) 
-        
+        #print(f"rgb: {rgb.shape}, start_index: {start_index}, end_index: {end_index}, start_sec: {start_sec}, end_sec: {end_sec}")
+        #print("before transform rgb.shape: ", rgb.shape)
+        # print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        # print(get_transforms(synchformer_cfg, ['train'])['train'])
+        # print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        if mode == "train":
+            item_temp = get_transforms(synchformer_cfg, ['train'])['train'](item_temp) 
+        else:
+            item_temp = get_transforms(synchformer_cfg, ['test'])['test'](item_temp) 
+        # print("#############################################################################################################################################3")
+        #print(f"rgb: {item_temp['video'].shape}, attention mask: , {item_temp['mask'].shape},  vlen_frames: {item_temp['vlen_frames']}, start_index: {start_index}, end_index: {end_index}, start_sec: {start_sec}, end_sec: {end_sec}")
+        # print("video: \n", item_temp['v_ranges'])
+        # print("attention_mask: \n", item_temp['mask'])
+        # print("#############################################################################################################################################3 \n\n\n")
         x = item_temp['video'].unsqueeze(0)
 
     else:
         print('Undefined control type')
 
-    return x
+    return x, item_temp

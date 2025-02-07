@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/rewas/./train_miil.py", line 338, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 141, in main
+    start_epoch, start_step = load_checkpoint(args.checkpoint_path, phi, optimizer, lr_scheduler, accelerator)
+  File "/workspace/rewas/load_checkpoint.py", line 19, in load_checkpoint
+    if os.path.exists(path):
+  File "/root/miniconda3/envs/rewas/lib/python3.10/genericpath.py", line 19, in exists
+    os.stat(path)
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType

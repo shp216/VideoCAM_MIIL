@@ -1,0 +1,36 @@
+[INFO] Resuming from checkpoint: ./results_resume/checkpoint_epoch0_step40.pth
+[INFO] Successfully loaded checkpoint from epoch 0, step 40
+Start_epoch: 0, start_step: 40
+Starting epoch 1/100...
+Epoch 1:   0%|                                                                               | 70/84952 [02:09<31:53:35,  1.35s/it, Loss=0.343]Traceback (most recent call last):
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step40.pth
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step60.pth
+  File "/workspace/rewas/./train_miil.py", line 356, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 184, in main
+    hint, _, hint_mask = video_encoder(video, for_loop=False, cont_mask=mask)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/model/modules/feat_extractors/visual/motionformer.py", line 214, in forward
+    x, x_mask = self.forward_segments(x, orig_shape=orig_shape, cont_mask=cont_mask)
+  File "/workspace/rewas/encoder/model/modules/feat_extractors/visual/motionformer.py", line 231, in forward_segments
+    x, x_mask = self.forward_features(x, cont_mask=cont_mask)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/video_model_builder.py", line 269, in forward_features
+    x = blk(x, seq_len=npatch, num_frames=self.temporal_resolution,
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/vit_helper.py", line 370, in forward
+    space_output = self.attn(self.norm1(time_residual), self.einops_from_space, self.einops_to_space,
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/vit_helper.py", line 124, in forward
+    cls_out = qkv_attn(cls_q, k, v, tok_mask=tok_mask)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/vit_helper.py", line 39, in qkv_attn
+    sim = sim.masked_fill(tok_mask.view(BSH, 1, N) == 0, float('-inf'))  # 1 - broadcasts across N
+KeyboardInterrupt

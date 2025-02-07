@@ -1,0 +1,13 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:33<00:00,  1.13s/it]
+Epoch 1:   0%|                                                                               | 58/84952 [06:05<26:14:35,  1.11s/it, Loss=0.775]Traceback (most recent call last):
+Evaluation completed. Average Loss1: 6.2333, Average Loss2: 6.2093, Average Loss3: 6.1882
+Evaluation completed. Soft IoU: 6.2333, IoU1: 0.0049, IoU2: 0.0052, IoU3: 0.0077
+log please!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step0.pth
+  File "/workspace/rewas/./train_miil.py", line 357, in <module>
+  File "/workspace/rewas/./train_miil.py", line 226, in main
+    max_value = gradcam_valid.max()
+KeyboardInterrupt

@@ -1,0 +1,32 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating:   0%|                                                                                                      | 0/188 [00:40<?, ?it/s]
+Max value: 21.045841217041016
+Max value: 30.896459579467773
+Max value: 28.951034545898438
+Max value: 14.54904842376709
+Max value: 19.89805030822754
+Max value: 21.422395706176758
+Max value: 23.98825454711914
+Max value: 12.465036392211914
+Max value: 15.78333568572998
+Max value: 36.49831008911133
+Max value: 14.164495468139648
+Max value: 27.37910270690918
+Max value: 17.65432357788086
+Max value: 24.878149032592773
+Max value: 22.71183204650879
+Max value: 9.731605529785156
+Traceback (most recent call last):                                                                                     | 0/188 [00:00<?, ?it/s]
+  File "/workspace/rewas/./train_miil.py", line 353, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 277, in main
+    avg_loss1, avg_loss2, avg_loss3, avg_iou1, avg_iou2, avg_iou3 = evaluate(phi, video_encoder, test_loader, synchformer_cfg.training.use_half_precision)
+  File "/workspace/rewas/evaluate_cam.py", line 127, in evaluate
+    iou1,_ = pixelwise_soft_iou(interpolated_pred_cam, gradcam_valid_0s)
+  File "/workspace/rewas/evaluate_cam.py", line 108, in pixelwise_soft_iou
+    cam1 = np.array(cam1)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/_tensor.py", line 1149, in __array__
+    return self.numpy()
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.

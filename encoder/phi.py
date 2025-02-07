@@ -15,6 +15,7 @@ class Phi(nn.Module):
 
         self.projection1 = nn.Sequential(
             nn.Linear(input_dim, input_dim),
+            nn.Dropout(0.3),
         )
 
         self.hint_blocks = SimpleTransformer(
@@ -24,24 +25,25 @@ class Phi(nn.Module):
                     num_heads=8,
                     bias=True,
                     add_bias_kv=True,
+                    dropout=0.3,
+                    batch_first=True
                 ),
             embed_dim = input_dim,
             num_blocks = 3,
             weight_init_style = "pytorch",  # possible values jax or pytorch
         )
+        
 
         self.projection2 = nn.Sequential(
-            nn.Linear(768,128),
+            nn.Linear(768,768),
             nn.ReLU(),
-            nn.Linear(128,64),
-            nn.ReLU(),
-            nn.Linear(64,16),
-            nn.ReLU(),
-            nn.Linear(16,1),
+            nn.Dropout(0.3),
+            nn.Linear(768,527),
+            nn.ReLU()
         )
 
-    def forward(self, x):
+    def forward(self, x, attn_mask=None):
         x = self.projection1(x)
-        x = self.hint_blocks(x)
+        x = self.hint_blocks(x, attn_mask)
         x = self.projection2(x)
         return x

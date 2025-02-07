@@ -1,0 +1,11 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:37<00:00,  1.16s/it]
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:25<00:00,  1.29it/s]
+Evaluation completed. Average Loss1: 6.2333, Average Loss2: 6.2093, Average Loss3: 6.1882
+Evaluation completed. Soft IoU: 6.2333, IoU1: 0.0049, IoU2: 0.0052, IoU3: 0.0077
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step0.pth
+Epoch 1:   5%|███▊                                                                       | 4307/84952 [1:25:57<24:21:53,  1.09s/it, Loss=0.614]
+Evaluation completed. Average Loss1: 1.2148, Average Loss2: 1.2892, Average Loss3: 1.2818
+Evaluation completed. Soft IoU: 1.2148, IoU1: 0.0091, IoU2: 0.0031, IoU3: 0.0031

@@ -1,0 +1,22 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:03<00:00,  1.03it/s]
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:15<00:00,  1.38it/s]
+Evaluation completed. Average Loss1: 6.2332, Average Loss2: 6.2092, Average Loss3: 6.1881
+Evaluation completed. Soft IoU: 6.2332, IoU1: 0.0049, IoU2: 0.0052, IoU3: 0.0077
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step0.pth
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:18<00:00,  1.36it/s]
+Evaluation completed. Average Loss1: 1.2424, Average Loss2: 1.2584, Average Loss3: 1.2165
+Evaluation completed. Soft IoU: 1.2424, IoU1: 0.0063, IoU2: 0.0024, IoU3: 0.0028
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [02:22<00:00,  1.32it/s]
+Evaluation completed. Average Loss1: 1.3035, Average Loss2: 1.3774, Average Loss3: 1.3684
+Evaluation completed. Soft IoU: 1.3035, IoU1: 0.0087, IoU2: 0.0030, IoU3: 0.0032
+Epoch 1:   4%|██▋                                                                         | 3030/84952 [1:13:40<31:10:37,  1.37s/it, Loss=1.66]Traceback (most recent call last):
+Evaluation completed. Average Loss1: 1.2101, Average Loss2: 1.2902, Average Loss3: 1.2894
+Evaluation completed. Soft IoU: 1.2101, IoU1: 0.0092, IoU2: 0.0031, IoU3: 0.0031
+  File "/workspace/rewas/./train_miil.py", line 355, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 225, in main
+    max_value = gradcam_valid.max()
+KeyboardInterrupt

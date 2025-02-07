@@ -1,0 +1,35 @@
+[INFO] Resuming from checkpoint: ./results_resume/checkpoint_epoch0_step40.pth
+[INFO] Successfully loaded checkpoint from epoch 0, step 40
+Start_epoch: 0, start_step: 40
+Starting epoch 1/100...
+Epoch 1:   0%|                                                                               | 10/84952 [01:33<54:34:12,  2.31s/it, Loss=0.815]Traceback (most recent call last):
+[INFO] Checkpoint saved at ./results_resume/checkpoint_epoch0_step40.pth
+  File "/workspace/rewas/./train_miil.py", line 355, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 183, in main
+    hint, _, hint_mask = video_encoder(video, for_loop=False, cont_mask=mask)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/model/modules/feat_extractors/visual/motionformer.py", line 214, in forward
+    x, x_mask = self.forward_segments(x, orig_shape=orig_shape, cont_mask=cont_mask)
+  File "/workspace/rewas/encoder/model/modules/feat_extractors/visual/motionformer.py", line 231, in forward_segments
+    x, x_mask = self.forward_features(x, cont_mask=cont_mask)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/video_model_builder.py", line 191, in forward_features
+    x = self.patch_embed_3d(x)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/./encoder/model/modules/feat_extractors/visual/motionformer_src/vit_helper.py", line 442, in forward
+    x = self.proj(x)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 725, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 720, in _conv_forward
+    return F.conv3d(
+KeyboardInterrupt

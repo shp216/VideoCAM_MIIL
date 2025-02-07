@@ -93,7 +93,7 @@ class Mlp(nn.Module):
 
 class MultiheadAttention(nn.MultiheadAttention):
     def forward(self, x: torch.Tensor, attn_mask: torch.Tensor):
-        return super().forward(x, x, x, need_weights=False, attn_mask=attn_mask)[0]
+        return super().forward(x, x, x, need_weights=False, key_padding_mask=attn_mask)[0]
 
 
 class ViTAttention(Attention):

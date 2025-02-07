@@ -1,0 +1,49 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating:  12%|███▍                        | 23/188 [00:59<07:08,  2.60s/it]t, Loss=1.49]
+Global Max: 0.12886852025985718
+Traceback (most recent call last):           | 23/188 [00:54<02:06,  1.31it/s]
+  File "/workspace/rewas/./train_miil.py", line 338, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 264, in main
+    avg_loss1, avg_loss2, avg_loss3, avg_iou1, avg_iou2, avg_iou3 = evaluate(phi, video_encoder, test_loader, synchformer_cfg.training.use_half_precision)
+  File "/workspace/rewas/evaluate_cam.py", line 76, in evaluate
+    pred_cam = phi(hint.float(), attn_mask=attn_mask_flat).squeeze(2)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/parallel/data_parallel.py", line 191, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/phi.py", line 46, in forward
+    x = self.hint_blocks(x, attn_mask)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/transformer.py", line 277, in forward
+    tokens = blk(tokens, attn_mask=attn_mask)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/transformer.py", line 161, in forward
+    x = x + self.drop_path(self.attn(self.norm_1(x), attn_mask))
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/rewas/encoder/transformer.py", line 96, in forward
+    return super().forward(x, x, x, need_weights=False, key_padding_mask=attn_mask)[0]
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 1368, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/functional.py", line 6097, in multi_head_attention_forward
+    q, k, v = _in_projection_packed(query, key, value, in_proj_weight, in_proj_bias)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/torch/nn/functional.py", line 5501, in _in_projection_packed
+    proj = linear(q, w, b)
+KeyboardInterrupt

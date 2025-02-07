@@ -1,0 +1,18 @@
+[INFO] No checkpoint found at None. Starting from scratch.
+Start_epoch: 0, start_step: 0
+Starting epoch 1/100...
+Evaluating: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 188/188 [03:34<00:00,  1.14s/it]
+Traceback (most recent call last):███████████████████████████████████████████████████████████████████████████| 188/188 [03:34<00:00,  1.11it/s]
+Evaluation completed. Average Loss1: 6.2332, Average Loss2: 6.2092, Average Loss3: 6.1881
+Evaluation completed. Soft IoU: 6.2332, IoU1: 0.0049, IoU2: 0.0052, IoU3: 0.0077
+  File "/workspace/rewas/./train_miil.py", line 353, in <module>
+    main(args)
+  File "/workspace/rewas/./train_miil.py", line 278, in main
+    wandb.log({
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 442, in wrapper
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 394, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/rewas/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 384, in wrapper
+    return func(self, *args, **kwargs)
+TypeError: Run.log() got an unexpected keyword argument 'flush'
