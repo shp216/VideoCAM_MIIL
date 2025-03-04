@@ -49,8 +49,8 @@ def safe_convert_video(input_path, output_path):
         print(f"[Error] Skipping {input_path} due to error: {e}")
 
 if __name__ == "__main__":
-    input_folder = "./test_dataset_real/AVsync_videos"  # Folder containing original videos
-    output_folder = "./test_dataset_real/AVsync_videos_25fps"  # Folder to save converted videos
-    max_workers = 64  # Number of parallel processes (adjust based on your system)
+    input_folder = "./MMG_test/Random_Vggsound_Video"  # Folder containing original videos
+    output_folder = "./MMG_test/Random_Vggsound_Video_25fps"  # Folder to save converted videos
+    max_workers = 16  # Number of parallel processes (adjust based on your system)
 
     process_videos(input_folder, output_folder, max_workers)

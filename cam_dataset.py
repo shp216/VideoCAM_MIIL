@@ -208,6 +208,7 @@ class VideoAudioTestDataset(Dataset):
                 "duration": self.duration,
                 "attention_mask": batch['attention_mask'],
                 "v_ranges": batch['v_ranges'],
+                "file_name": row['FileName']
             }
         except Exception as e:
             print(f"[Warning] Error processing index {idx}: {e}")
@@ -218,6 +219,143 @@ class VideoAudioTestDataset(Dataset):
                 "gradcam_2s": torch.zeros(1),
                 "duration": -1,
                 "attention_mask": torch.zeros(1),
-                "v_ranges": torch.zeros(1), 
+                "v_ranges": torch.zeros(1),
+                "file_name": ""
             }
 
+
+
+class CurationTestDataset(Dataset):
+    def __init__(self, csv_file, video_dir, cam_dir, control_type, synchformer_exp, synchformer_cfg,
+                 video_encoder, phi, seed=42, duration=5, guidance_scale=1.0, ddim_steps=50, batchsize=1, 
+                 re_encode=True, save_path=None, mode="test"):
+        """
+        Args:
+            csv_file (str): Path to the CSV file containing data information.
+            video_dir (str): Path to the video directory.
+            cam_dir (str): Path to the base GradCAM directory.
+            control_type (str): Control type for generation.
+            synchformer_exp (str): SynchFormer experiment identifier.
+            synchformer_cfg (dict): Configuration for the SynchFormer model.
+            video_encoder (object): Video encoder model.
+            phi (object): Model to generate predictions.
+            seed (int): Random seed.
+            duration (int): Duration for processing.
+            guidance_scale (float): Guidance scale for generation.
+            ddim_steps (int): Number of DDIM steps.
+            batchsize (int): Batch size for processing.
+            re_encode (bool): Whether to re-encode video.
+            save_path (str): Path to save generated results.
+            mode (str): Mode of the dataset ("train", "test", etc.).
+        """
+        self.data = pd.read_csv(csv_file)
+        self.video_dir = video_dir
+        self.cam_dir = cam_dir
+        self.control_type = control_type
+        self.synchformer_exp = synchformer_exp
+        self.synchformer_cfg = synchformer_cfg
+        self.video_encoder = video_encoder
+        self.phi = phi
+        self.seed = seed
+        self.duration = duration
+        self.guidance_scale = guidance_scale
+        self.ddim_steps = ddim_steps
+        self.batchsize = batchsize
+        self.re_encode = re_encode
+        self.save_path = save_path
+        self.mode = mode
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        try:
+            row = self.data.iloc[idx]
+            video_file = row['FileName'] + '.mp4'
+
+            videopath = os.path.join(self.video_dir, video_file)
+            gradcam_file_name = os.path.splitext(video_file)[0] + ".pt"
+            
+            
+
+            # AVsync GradCAM 파일 경로 생성
+            # avsync_cam_paths = {
+            #     "0s": os.path.join(self.cam_dir, "AVsync_audios_0s_cam", gradcam_file_name),
+            # }
+            
+            avsync_cam_paths = {
+                "0s": os.path.join(self.cam_dir, gradcam_file_name),
+            }
+            # AVsync GradCAM 파일 확인 및 로드
+            avsync_cams = {}
+            for key, path in avsync_cam_paths.items():
+                if os.path.exists(path):
+                    avsync_cams[key] = torch.load(path)
+                else:
+                    raise FileNotFoundError(f"AVsync GradCAM file not found for {video_file} in {key} directory.")
+
+            # Generate batch
+            batch = rewas_generation(
+                text="",
+                videos=videopath,
+                control_type=self.control_type,
+                synchformer_cfg=self.synchformer_cfg,
+                original_audio_file_path=None,
+                seed=self.seed,
+                duration=self.duration,
+                batchsize=self.batchsize,
+                re_encode=self.re_encode,
+                local_rank=0,
+                mode=self.mode
+            )
+
+            video = batch["model_inputs"].squeeze(0)
+            
+            start_sec = batch["start_sec"]
+            end_sec = batch["end_sec"]
+            
+            start_sec_grad = int(start_sec * 100)
+            end_sec_grad = int(end_sec * 100)
+
+            avsync_cams["0s"] = avsync_cams["0s"][:, start_sec_grad:end_sec_grad+1]
+            
+            # global_max_0s = 0.3951365351676941
+            # global_max_1s = 0.3577139973640442
+            # global_max_2s = 0.30765703320503235
+            # global_min = 0.0
+            # avsync_cams["0s"] = (avsync_cams["0s"] - global_min) / (global_max_0s - global_min)
+            # avsync_cams["1s"] = (avsync_cams["1s"] - global_min) / (global_max_1s - global_min)
+            # avsync_cams["2s"] = (avsync_cams["2s"] - global_min) / (global_max_2s - global_min)
+            
+            #sigma_0s = 0.001805894891731441
+            sigma_1s = 0.0017171804793179035
+            sigma_2s = 0.0015461144503206015
+            
+            sigma_Base = 0.001352745690383017
+            sigma_MMG = 0.0015611579874530435
+            sigma_MMG_LoRA = 0.0017637776909396052
+            
+            sigma_Random_Vggsound = 0.0019594731274992228
+            sigma_Curated_Vggsound = 0.0018734617624431849
+            
+            sigma_0s = sigma_Curated_Vggsound 
+            avsync_cams["0s"] = avsync_cams["0s"] / sigma_0s
+            
+            return {
+                "video": video,
+                "gradcam_0s": avsync_cams["0s"],
+                "duration": self.duration,
+                "attention_mask": batch['attention_mask'],
+                "v_ranges": batch['v_ranges'],
+                "file_name": row['FileName']
+            }
+        except Exception as e:
+            print(f"[Warning] Error processing index {idx}: {e}")
+            return {
+                "video": torch.zeros(1),
+                "gradcam_0s": torch.zeros(1),
+                "duration": -1,
+                "attention_mask": torch.zeros(1),
+                "v_ranges": torch.zeros(1),
+                "file_name": ""
+            }
