@@ -13,3 +13,8 @@ results/
 *.wav
 *.mp3
 *.png
+*.zip
+results_resume/
+*.wandb
+wandb/
+
