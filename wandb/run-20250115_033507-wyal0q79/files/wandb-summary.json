@@ -1,1 +1,0 @@
-{"eval/avg_iou1":0.5,"_timestamp":1.7369055245161226e+09,"_runtime":25817.043572218,"step":19158,"_wandb":{"runtime":25824},"loss":0.2912665903568268,"eval/avg_loss1":2.6238518647384506e-05,"eval/avg_loss3":3.0256563685640004e-05,"eval/avg_iou3":0.5,"eval/avg_loss2":2.8181631603824068e-05,"_step":19177,"eval/avg_iou2":0.5}
