@@ -242,6 +242,37 @@ def pixelwise_soft_iou(cam1, cam2):
     
     return mean_iou, iou_per_pixel
 
+import numpy as np
+
+def pixelwise_soft_iou_log_scaled(cam1, cam2):
+    # Ensure both CAMs are numpy arrays
+    cam1 = cam1.cpu().numpy()
+    cam2 = cam2.cpu().numpy()
+    
+    # Apply ln(1 + x) scaling
+    cam1 = np.log1p(10*cam1)
+    cam2 = np.log1p(10*cam2)
+    
+    cam1 = cam1 / np.max(cam1)
+    cam2 = cam2 / np.max(cam2)
+    
+    # Compute minimum and maximum for each pixel
+    intersection = np.minimum(cam1, cam2)
+    union = np.maximum(cam1, cam2)
+    
+    # Mask for valid pixels (exclude areas where both CAMs are 0)
+    valid_mask = union > 0  # Union > 0 ensures we exclude both-zero pixels
+    
+    # Calculate pixel-wise IOU (avoid division by zero using valid_mask)
+    iou_per_pixel = np.zeros_like(cam1, dtype=np.float32)
+    iou_per_pixel[valid_mask] = intersection[valid_mask] / union[valid_mask]
+    
+    # Calculate mean IOU across valid pixels
+    mean_iou = np.mean(iou_per_pixel[valid_mask]) if np.any(valid_mask) else 0.0
+    
+    return mean_iou, iou_per_pixel
+
+
 def evaluate_just1(phi, video_encoder, dataloader, use_half_precision=False):
     """
     Evaluate the model using the provided dataloader.
@@ -258,8 +289,8 @@ def evaluate_just1(phi, video_encoder, dataloader, use_half_precision=False):
     phi.eval()  # Set model to evaluation mode
     video_encoder.eval()  # Set video encoder to evaluation mode
 
-    img_save_dir = "./MMG_test/Curated_VGG_Pred_CAM_images"
-    img_save_dir_gt = "./MMG_test/Curated_VGG_GT_CAM_images"
+    img_save_dir = "./vggsound_eval_dataset/gt_vggsound_sparse_test/pred_cam_images"
+    img_save_dir_gt = "./vggsound_eval_dataset/gt_vggsound_sparse_test/gt_cam_images"
     iou_scores = []  # IOU 점수를 저장할 리스트
     with torch.no_grad():  # No gradient computation during evaluation
         for step, batch in enumerate(tqdm(dataloader, desc="Evaluating", dynamic_ncols=False)):
@@ -314,17 +345,20 @@ def evaluate_just1(phi, video_encoder, dataloader, use_half_precision=False):
                 ).squeeze(0)
                 
                 iou1,_ = pixelwise_soft_iou(interpolated_pred_cam, gradcam_valid_0s)
+                #iou1,_ = pixelwise_soft_iou_log_scaled(interpolated_pred_cam, gradcam_valid_0s)
+
                 
                 labels = config.labels
-                save_top5_class_time_cam_image(interpolated_pred_cam.detach().cpu().numpy(), labels, img_save_dir, filename[i], mode="pred")
-                save_top5_class_time_cam_image(gradcam_valid_0s.detach().cpu().numpy(), labels, img_save_dir_gt, filename[i], mode="gt")
+                #save_top5_class_time_cam_image(interpolated_pred_cam.detach().cpu().numpy(), labels, img_save_dir, filename[i], mode="pred")
+                #save_top5_class_time_cam_image(gradcam_valid_0s.detach().cpu().numpy(), labels, img_save_dir_gt, filename[i], mode="gt")
                 iou_scores.append({"FileName": filename[i], "iou_score": iou1})
 
     # IOU 점수를 CSV 파일로 저장
     iou_scores_df = pd.DataFrame(iou_scores)
-    iou_scores_df.to_csv("./MMG_test/Curated_VGG_IoU.csv", index=False)
+    #iou_scores_df.to_csv("./MMG_test/SIoU_scores.csv", index=False)
 
     print("IOU scores saved to csv")
+    print(f"Mean IOU Score: {iou_scores_df['iou_score'].mean():.4f}")
 
 
                 # # Calculate losses for each gradcam

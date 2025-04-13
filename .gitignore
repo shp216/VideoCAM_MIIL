@@ -3,7 +3,6 @@ ckpts/
 *.ckpt
 *.pt
 *.pth
-evaluation/clap/CLAP_weights_2022.pth
 output/
 taming/
 evaluation/tmp/

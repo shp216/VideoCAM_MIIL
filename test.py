@@ -47,7 +47,6 @@ def main(args):
     #####################################################################
     # Dataset and DataLoader
     #####################################################################
-    
     test_dataset = CurationTestDataset(
         csv_file=args.test_csv_file,
         video_dir=args.test_video_dir,
@@ -117,13 +116,13 @@ if __name__ == '__main__':
     #####################################################################
     # Test Dataset and Paths
     #####################################################################
-    # parser.add_argument("--test_csv_file", type=str, default="./test_dataset_real/test_videos_filenames.csv", help="Path to the CSV file containing video file names.")
-    # parser.add_argument("--test_video_dir", type=str, default="./test_dataset_real/AVsync_videos_25fps", help="Path to the directory containing video files.")
-    # parser.add_argument("--test_cam_dir", type=str, default="./test_dataset_real", help="Path to the directory containing GradCAM files.")
-
     parser.add_argument("--test_csv_file", type=str, default="./MMG_test/Curated_Vggsound_Video_filenames.csv", help="Path to the CSV file containing video file names.")
     parser.add_argument("--test_video_dir", type=str, default="./MMG_test/Curated_Vggsound_Video_25fps", help="Path to the directory containing video files.")
     parser.add_argument("--test_cam_dir", type=str, default="./MMG_test/Curated_Vggsound_CAM", help="Path to the directory containing GradCAM files.")
+
+    # parser.add_argument("--test_csv_file", type=str, default="./avsync_eval_dataset/GT/Video_filenames.csv", help="Path to the CSV file containing video file names.")
+    # parser.add_argument("--test_video_dir", type=str, default="./avsync_eval_dataset/GT/video_25fps", help="Path to the directory containing video files.")
+    # parser.add_argument("--test_cam_dir", type=str, default="./avsync_eval_dataset/GT/audiocam", help="Path to the directory containing GradCAM files.")
 
     #####################################################################
     # Model and Experiment
@@ -132,7 +131,7 @@ if __name__ == '__main__':
     parser.add_argument("--synchformer_exp", type=str, default="24-01-04T16-39-21", help="Synchformer experiment name.")
     parser.add_argument("--phi_ckpt_path", type=str, default="./ckpts/phi_vggsound.ckpt", help="Path to the pretrained phi checkpoint.")
     parser.add_argument("--resume", action="store_true", help="Resume training from a checkpoint")
-    parser.add_argument("--checkpoint_path", type=str, default="None")
+    parser.add_argument("--checkpoint_path", type=str, default="./results_resume/checkpoint_epoch5_step0.pth")
 
     #####################################################################
     # Training Parameters
@@ -140,7 +139,7 @@ if __name__ == '__main__':
     parser.add_argument("--batchsize", type=int, default=1, help="Batch size for preprocessing.")
     parser.add_argument("--train_batch_size", type=int, default=16, help="Training batch size.")
     parser.add_argument("--test_batch_size", type=int, default=8, help="Training batch size.")
-    parser.add_argument("--num_workers", type=int, default=16, help="Number of DataLoader workers.")
+    parser.add_argument("--num_workers", type=int, default=4, help="Number of DataLoader workers.")
     parser.add_argument("--duration", type=float, default=5.0, help="Duration of video clips in seconds.")
     parser.add_argument("--guidance_scale", type=float, default=3.0, help="Guidance scale.")
     parser.add_argument("--ddim_steps", type=int, default=200, help="DDIM sampling steps.")

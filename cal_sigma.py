@@ -8,7 +8,7 @@ class GradCamProcessor:
     def __init__(self, csv_path, audio_cam_dir):
         self.data = pd.read_csv(csv_path)
         self.audio_cam_dir = audio_cam_dir
-
+    
     def calculate_gradcam_stats(self):
         sum_values = 0  # To store sum of values
         sum_squared_values = 0  # To store sum of squared values
@@ -22,7 +22,7 @@ class GradCamProcessor:
             video_file = row['FileName']
 
             # Replace .mp4 with .pt to find the corresponding audio CAM file
-            gradcam_file_name = video_file + ".pt"
+            gradcam_file_name = str(video_file) + ".pt"
             gradcam_path = os.path.join(self.audio_cam_dir, gradcam_file_name)
 
             # Check if the Grad-CAM file exists
@@ -53,19 +53,19 @@ class GradCamProcessor:
 
         return mean, std, global_max, processed_count
 
-# Example usage
-#csv_path = "./test_dataset_real/test_videos_filenames.csv"
-csv_path = "./MMG_test/Curated_Vggsound_Video_filenames.csv"
+# # Example usage
+# #csv_path = "./test_dataset_real/test_videos_filenames.csv"
+# csv_path = "./MMG_test/Curated_Vggsound_Video_filenames.csv"
 
-audio_cam_dir = "./MMG_test/Curated_Vggsound_CAM"
+# audio_cam_dir = "./MMG_test/Curated_Vggsound_CAM"
 
-processor = GradCamProcessor(csv_path, audio_cam_dir)
-gradcam_mean, gradcam_std, global_max, processed_count = processor.calculate_gradcam_stats()
+# processor = GradCamProcessor(csv_path, audio_cam_dir)
+# gradcam_mean, gradcam_std, global_max, processed_count = processor.calculate_gradcam_stats()
 
-print(f"Mean of Grad-CAM values: {gradcam_mean}")
-print(f"Standard Deviation of Grad-CAM values: {gradcam_std}")
-print(f"Global Maximum of Grad-CAM values: {global_max}")
-print(f"Total Processed Files: {processed_count}")
+# print(f"Mean of Grad-CAM values: {gradcam_mean}")
+# print(f"Standard Deviation of Grad-CAM values: {gradcam_std}")
+# print(f"Global Maximum of Grad-CAM values: {global_max}")
+# print(f"Total Processed Files: {processed_count}")
 
 
 

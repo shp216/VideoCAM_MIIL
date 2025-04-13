@@ -4,6 +4,7 @@ from torch.utils.data import Dataset
 import pandas as pd
 from tqdm import tqdm
 from audioldm.pipeline import rewas_generation, build_control_model
+from cal_sigma import GradCamProcessor
 
 class VideoAudioDataset(Dataset):
     def __init__(self, csv_file, video_dir, cam_dir, control_type, synchformer_exp, synchformer_cfg, video_encoder, phi, 
@@ -249,6 +250,7 @@ class CurationTestDataset(Dataset):
             mode (str): Mode of the dataset ("train", "test", etc.).
         """
         self.data = pd.read_csv(csv_file)
+        self.csv_file = csv_file
         self.video_dir = video_dir
         self.cam_dir = cam_dir
         self.control_type = control_type
@@ -264,6 +266,11 @@ class CurationTestDataset(Dataset):
         self.re_encode = re_encode
         self.save_path = save_path
         self.mode = mode
+        
+        processor = GradCamProcessor(self.csv_file, self.cam_dir) 
+        #print(f"csv_file: {self.csv_file}, self.cam_dir: {self.cam_dir}")
+        gradcam_mean, gradcam_std, global_max, processed_count = processor.calculate_gradcam_stats()
+        self.gradcam_std = gradcam_std
 
     def __len__(self):
         return len(self.data)
@@ -275,7 +282,6 @@ class CurationTestDataset(Dataset):
 
             videopath = os.path.join(self.video_dir, video_file)
             gradcam_file_name = os.path.splitext(video_file)[0] + ".pt"
-            
             
 
             # AVsync GradCAM 파일 경로 생성
@@ -327,20 +333,21 @@ class CurationTestDataset(Dataset):
             # avsync_cams["1s"] = (avsync_cams["1s"] - global_min) / (global_max_1s - global_min)
             # avsync_cams["2s"] = (avsync_cams["2s"] - global_min) / (global_max_2s - global_min)
             
-            #sigma_0s = 0.001805894891731441
-            sigma_1s = 0.0017171804793179035
-            sigma_2s = 0.0015461144503206015
+            # #sigma_0s = 0.001805894891731441
+            # sigma_1s = 0.0017171804793179035
+            # sigma_2s = 0.0015461144503206015
             
-            sigma_Base = 0.001352745690383017
-            sigma_MMG = 0.0015611579874530435
-            sigma_MMG_LoRA = 0.0017637776909396052
+            # sigma_Base = 0.001352745690383017
+            # sigma_MMG = 0.0015611579874530435
+            # sigma_MMG_LoRA = 0.0017637776909396052
             
-            sigma_Random_Vggsound = 0.0019594731274992228
-            sigma_Curated_Vggsound = 0.0018734617624431849
+            # sigma_Random_Vggsound = 0.0019594731274992228
+            # sigma_Curated_Vggsound = 0.0018734617624431849
             
-            sigma_0s = sigma_Curated_Vggsound 
-            avsync_cams["0s"] = avsync_cams["0s"] / sigma_0s
+            # sigma_0s = sigma_Random_Vggsound 
+            avsync_cams["0s"] = avsync_cams["0s"] / self.gradcam_std
             
+
             return {
                 "video": video,
                 "gradcam_0s": avsync_cams["0s"],
