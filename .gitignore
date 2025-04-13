@@ -1,5 +1,4 @@
 __pycache__/
-ckpts/
 *.ckpt
 *.pt
 *.pth
@@ -13,7 +12,4 @@ results/
 *.mp3
 *.png
 *.zip
-results_resume/
 *.wandb
-wandb/
-
